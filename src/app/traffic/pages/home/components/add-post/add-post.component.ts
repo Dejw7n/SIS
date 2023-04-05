@@ -1,11 +1,13 @@
-import { Component, Inject, OnInit, Self } from "@angular/core";
-import { PostService } from "../../../../services/post/post.service";
+import { Component, OnInit, Self } from "@angular/core";
 import { CenterModel } from "../../../../models/center.model";
 import { PriorityModel } from "../../../../models/priority.model";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { PriorityService } from "src/app/traffic/services/priority/priority.service";
+import { PostService } from "src/app/traffic/services/post/post.service";
+import { CenterService } from "src/app/traffic/services/center/center.service";
 
 class DialogData {}
 
@@ -27,13 +29,13 @@ export class AddPostComponent implements OnInit {
 		CenterInput: 1,
 	};
 
-	constructor(private postService: PostService, private http: HttpClient, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private http: HttpClient, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
-		this.postService.getCenters().subscribe((res) => {
+		this.centerService.getAllCenters().subscribe((res) => {
 			this.centers = res;
 		});
-		this.postService.getPriorities().subscribe((res) => {
+		this.priorityService.getAllPriorities().subscribe((res) => {
 			this.priorities = res;
 		});
 	}

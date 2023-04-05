@@ -1,11 +1,11 @@
-import { PostService } from "./../../../../services/post/post.service";
 import { Component, OnInit, Self } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
 import { CenterModel } from "src/app/traffic/models/center.model";
-import { MyErrorStateMatcher } from "../../../users/components/edit-user/edit-user.component";
 import { PriorityModel } from "src/app/traffic/models/priority.model";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { PriorityService } from "src/app/traffic/services/priority/priority.service";
+import { PostService } from "src/app/traffic/services/post/post.service";
+import { CenterService } from "src/app/traffic/services/center/center.service";
 
 @Component({
 	selector: "app-edit-post",
@@ -25,7 +25,7 @@ export class EditPostComponent implements OnInit {
 		centerInput: null,
 	};
 
-	constructor(private postService: PostService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
 		this.postService.getPost(this.postId).subscribe((res) => {
@@ -38,10 +38,10 @@ export class EditPostComponent implements OnInit {
 				centerInput: this.postData.center_id,
 			};
 		});
-		this.postService.getCenters().subscribe((res) => {
+		this.centerService.getAllCenters().subscribe((res) => {
 			this.centers = res;
 		});
-		this.postService.getPriorities().subscribe((res) => {
+		this.priorityService.getAllPriorities().subscribe((res) => {
 			this.priorities = res;
 		});
 	}

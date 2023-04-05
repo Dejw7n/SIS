@@ -11,6 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { UserService } from "src/app/traffic/services/user/user.service";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { CenterService } from "src/app/traffic/services/center/center.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 	isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -41,10 +42,10 @@ export class AddUserComponent implements OnInit {
 		passwordInput: null,
 	};
 
-	constructor(private postService: PostService, private userService: UserService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private centerService: CenterService, private postService: PostService, private userService: UserService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
-		this.postService.getCenters().subscribe((res) => {
+		this.centerService.getAllCenters().subscribe((res) => {
 			this.centers = res;
 		});
 		this.userService.getAllRoles().subscribe((res) => {
