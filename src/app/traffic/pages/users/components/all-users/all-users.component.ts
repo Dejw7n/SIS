@@ -1,6 +1,6 @@
 import { EditUserComponent } from "./../edit-user/edit-user.component";
 import { AddUserComponent } from "./../add-user/add-user.component";
-import { Component, OnInit, Pipe, PipeTransform } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../../../services/user/user.service";
 import { UserModel } from "../../../../models/user.model";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -52,7 +52,7 @@ export class AllUsersComponent implements OnInit {
 	}
 
 	getAllUsers() {
-		this.userService.getAllUser().subscribe(
+		this.userService.getAllUsers().subscribe(
 			(Response) => {
 				this.loading.users.response = true;
 				this.Users = Response;

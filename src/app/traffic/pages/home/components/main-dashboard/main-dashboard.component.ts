@@ -9,6 +9,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { AddPostComponent } from "../add-post/add-post.component";
 import { EditPostComponent } from "../edit-post/edit-post.component";
 import { PostHistoryComponent } from "../post-history/post-history.component";
+import { AuthService } from "src/app/core/services/auth/auth.service";
+import { Observable } from "rxjs/internal/Observable";
 
 @Component({
 	selector: "app-main-dashboard",
@@ -25,7 +27,14 @@ export class MainDashboardComponent implements OnInit {
 		},
 	};
 
-	constructor(private postService: PostService, private fileService: FileService, public dialog: MatDialog, private router: Router) {}
+	userCenterId: number = 0;
+	userRole: string = "";
+
+	constructor(private authService: AuthService, private postService: PostService, private fileService: FileService, public dialog: MatDialog, private router: Router) {
+		const userData = this.authService.getUserData();
+		this.userCenterId = userData.center_id;
+		this.userRole = userData.role;
+	}
 
 	ngOnInit(): void {
 		this.postService.getAllPosts().subscribe(
@@ -58,6 +67,10 @@ export class MainDashboardComponent implements OnInit {
 		element.setAttribute("data-filter-selected", true);
 
 		this.center = center;
+	}
+
+	getFilesOfPost(postId: number): Observable<any[]> {
+		return this.postService.getFilesOfPost(postId);
 	}
 
 	parseJson(json: string) {
@@ -115,10 +128,5 @@ export class MainDashboardComponent implements OnInit {
 	getPostFileIcon(fileName: string) {
 		let extension = fileName.split(".").pop();
 		return extension;
-	}
-
-	getLoggedUser() {
-		let loggedUser = JSON.parse(localStorage.getItem("userData")!)[0];
-		return loggedUser;
 	}
 }

@@ -7,7 +7,7 @@
 			<button (click)="openAddPosts()" class="px-6 py-2 rounded-sm font-semibold text-sm text-white isolate bg-red-600 hover:bg-red-700">Nový příspěvek</button>
 		</div>
 	</div>
-	<div *ngIf="getLoggedUser().center_id == 3 || getLoggedUser().role_id == 2 || getLoggedUser().role_id == 3" class="grid grid-cols-1 sm:grid-cols-3 h-40 sm:h-8 mt-4 rounded-3xl bg-white">
+	<div *ngIf="userCenterId == 3 || userRole == 'admin' || userRole == 'admin'" class="grid grid-cols-1 sm:grid-cols-3 h-40 sm:h-8 mt-4 rounded-3xl bg-white">
 		<div (click)="updateCenter(0, $event)" class="cursor-pointer grid h-full rounded-3xl isolate bg-red-600" [attr.data-filter-selected]="true">
 			<span class="m-auto font-semibold text-white">VŠECHNY</span>
 		</div>
@@ -62,11 +62,11 @@
 						</div>
 					</div>
 					<div class="pr-5 overflow-x-auto">
-						<div class="text-black" [innerHTML]="post.text"></div>
+						<div class="text-black" [innerHTML]="post.content"></div>
 					</div>
 					<div class="flex border-t-2 py-4">
 						<div class="flex flex-wrap-reverse rounded-lg bg-violet-50">
-							<div *ngFor="let filePost of parseJson(post.files)" (click)="downloadFile(filePost.uuid)" class="flex px-4 py-3 rounded-lg cursor-pointer hover:bg-violet-100">
+							<div *ngFor="let filePost of getFilesOfPost(post.id) | async" (click)="downloadFile(filePost.uuid)" class="flex px-4 py-3 rounded-lg cursor-pointer hover:bg-violet-100">
 								<div class="flex h-10">
 									<div class="">
 										<img src="/assets/icons/mime/{{ getPostFileIcon(filePost.name) }}.png" alt="" class="h-full" />

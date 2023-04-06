@@ -13,7 +13,7 @@
 	</div>
 	<div class="">
 		<div *ngFor="let item of menuItems; i">
-			<div *ngIf="userRole >= item.requiredRole" style="cursor: pointer" class="hover:bg-red-700" [routerLink]="[item.href]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="bg-red-600 activeMenu">
+			<div *ngIf="item.requiredRole.includes(userRole)" style="cursor: pointer" class="hover:bg-red-700" [routerLink]="[item.href]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="bg-red-600 activeMenu">
 				<ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"> </ng-container>
 			</div>
 		</div>

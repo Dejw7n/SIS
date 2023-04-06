@@ -2,29 +2,29 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../../environments/environment";
-import { UserService } from "../user/user.service";
+import { AuthService } from "src/app/core/services/auth/auth.service";
 
 @Injectable({
 	providedIn: "root",
 })
 export class PostService {
-	private postApiUrl = environment.API_URL + "/Post/";
-	private fileApiUrl = environment.API_URL + "/FileApi/";
+	private postApiUrl = environment.API_URL + "/post";
+	private filePostApiUrl = environment.API_URL + "/file";
 	private headers = { "content-type": "application/json" };
 
-	constructor(private userService: UserService, private http: HttpClient) {}
+	constructor(private authService: AuthService, private http: HttpClient) {}
 
 	getAllPosts(): Observable<any> {
-		return this.http.get(this.postApiUrl + "getAllPosts", {});
+		return this.http.get(this.postApiUrl + "", {});
 	}
 	getPost(postId: number): Observable<any> {
-		return this.http.get(this.postApiUrl + "getPost/" + postId, {});
+		return this.http.get(this.postApiUrl + "/" + postId, {});
 	}
-	getFilesByPostId(postId: number): Observable<any> {
-		return this.http.get(this.fileApiUrl + "getFilesByPostId?postId=" + postId, {});
+	getFilesOfPost(postId: number): Observable<any> {
+		return this.http.get(this.filePostApiUrl + "/" + postId, {});
 	}
 	editPost(postId: number, postData: any) {
-		postData.userId = this.userService.getData().id;
+		postData.userId = this.authService.getUserData().id;
 		this.http.put(this.postApiUrl + postId, postData).subscribe();
 	}
 	deletePost(postId: number) {

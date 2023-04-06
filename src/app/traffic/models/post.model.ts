@@ -1,7 +1,7 @@
 export interface PostModel {
 	id: number;
 	title: string;
-	text: string;
+	content: string;
 	priority: number;
 	center_id: number;
 	user_id: number;

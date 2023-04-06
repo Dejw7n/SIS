@@ -16,13 +16,13 @@ export class MenuOverlayComponent implements OnInit {
 			label: "Příspěvky",
 			href: "/",
 			iconType: "appstore",
-			requiredRole: 3,
+			requiredRole: ["teacher", "admin"],
 		},
 		{
 			label: "Uživatelé",
 			href: "/users",
 			iconType: "team",
-			requiredRole: 1,
+			requiredRole: ["admin"],
 		},
 		// {
 		// 	label: "Závady",
@@ -50,7 +50,6 @@ export class MenuOverlayComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.userRole = this.authService.getUserData().role_id;
-		console.log(this.userRole);
+		this.userRole = this.authService.getUserData().role;
 	}
 }

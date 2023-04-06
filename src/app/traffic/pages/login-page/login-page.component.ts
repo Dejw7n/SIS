@@ -16,7 +16,7 @@ export class LoginPageComponent implements OnInit {
 	@Output() logged = new EventEmitter<boolean>();
 	loginData = {
 		email: "",
-		pass: "",
+		password: "",
 	};
 
 	connectionError: Boolean = false;
@@ -37,8 +37,7 @@ export class LoginPageComponent implements OnInit {
 	loginUser() {
 		this.authService.loginUser(this.loginData).subscribe(
 			(res) => {
-				localStorage.setItem("token", res.token);
-				localStorage.setItem("userData", JSON.stringify(res.userData));
+				localStorage.setItem("access_token", res.token);
 				beforePageChangeJs();
 				(async () => {
 					await new Promise((f) => setTimeout(f, 1000));
