@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "src/app/traffic/services/user/user.service";
+import { AuthService } from "src/app/core/services/auth/auth.service";
 
 @Component({
 	selector: "app-top-overlay",
@@ -14,7 +14,7 @@ export class TopOverlayComponent implements OnInit {
 		name: "",
 		lname: "",
 	};
-	constructor(private userService: UserService) {
+	constructor(private authService: AuthService) {
 		let days = ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota"];
 		this.dateFormatted = `${days[this.date.getDay()]}, ${this.date.getDate()}. ${this.date.getMonth() + 1}. ${this.date.getFullYear()}`;
 		let evenOddWeekNumber = this.getWeekNumber(this.date) % 2;
@@ -38,8 +38,8 @@ export class TopOverlayComponent implements OnInit {
 	}
 
 	changeName() {
-		this.userData.name = JSON.parse(localStorage.getItem("userData")!)[0].name;
-		this.userData.lname = JSON.parse(localStorage.getItem("userData")!)[0].lname;
+		this.userData.name = this.authService.getUserData().name;
+		this.userData.lname = this.authService.getUserData().lname;
 		window.removeEventListener("storage", this.changeName, false);
 	}
 }

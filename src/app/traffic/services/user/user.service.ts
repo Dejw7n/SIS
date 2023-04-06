@@ -12,7 +12,7 @@ export class UserService {
 
 	constructor(private http: HttpClient) {}
 
-	getAllUser(): Observable<any> {
+	getAllUsers(): Observable<any> {
 		return this.http.post<any>(this.apiUrl + "getAllUsers", {}, { headers: this.headers });
 	}
 	getUser(userId: number): Observable<any> {
@@ -20,10 +20,6 @@ export class UserService {
 	}
 	getMyData(): Observable<any> {
 		return this.http.post<any>(this.apiUrl + "getMyData", {});
-	}
-	getData() {
-		let data = JSON.parse(localStorage.getItem("userData")!);
-		return data[0];
 	}
 	getAllRoles(): Observable<any> {
 		return this.http.get(this.apiUrl + "getAllRoles", {});

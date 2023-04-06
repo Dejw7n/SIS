@@ -10,7 +10,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class AuthGuard implements CanActivate {
 	constructor(private authService: AuthService, private router: Router, private userService: UserService, private snackBar: MatSnackBar) {}
 	canActivate(next: ActivatedRouteSnapshot): boolean {
-		if (this.authService.loggedIn()) {
+		if (this.authService.validateToken()) {
 			return this.checkUser(next);
 		} else {
 			this.router.navigate(["/login"]).then((navigated: boolean) => {
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 	}
 
 	checkUser(route: ActivatedRouteSnapshot) {
-		let Userrole = this.userService.getData().role_id;
+		let Userrole = this.authService.getUserData().role_id;
 		if (route.data["required_role"] && route.data["required_role"] !== Userrole) {
 			this.router.navigate([""]);
 			return false;
