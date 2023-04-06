@@ -19,12 +19,31 @@ import { TokenInterceptor } from "./core/interceptors/token/token.interceptor";
 import { TrafficModule } from "./traffic/traffic.module";
 import { MatIconModule } from "@angular/material/icon";
 import { FooterComponent } from "./core/components/footer/footer.component";
+import { JwtModule } from "@auth0/angular-jwt";
 
 registerLocaleData(cs);
 
 @NgModule({
 	declarations: [AppComponent, FooterComponent],
-	imports: [TrafficModule, CommonModule, BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule, ErrorsModule, OverlayModule, ErrorsModule, NzEmptyModule, MatIconModule],
+	imports: [
+		JwtModule.forRoot({
+			config: {
+				tokenGetter: () => localStorage.getItem("access_token"),
+			},
+		}),
+		TrafficModule,
+		CommonModule,
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		FormsModule,
+		BrowserAnimationsModule,
+		ErrorsModule,
+		OverlayModule,
+		ErrorsModule,
+		NzEmptyModule,
+		MatIconModule,
+	],
 	exports: [],
 	providers: [
 		{ provide: NZ_I18N, useValue: cs_CZ },
