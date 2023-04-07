@@ -6,13 +6,10 @@ import { environment } from "src/environments/environment";
 @Injectable({
 	providedIn: "root",
 })
-export class CenterService {
-	private centerApiUrl = environment.API_URL + "/center";
-	private headers = { "content-type": "application/json" };
-
+export class RoleService {
+	private apiUrl: string = environment.API_URL + "/role";
 	constructor(private http: HttpClient) {}
-
-	getAllCenters(): Observable<any> {
-		return this.http.get(this.centerApiUrl, { headers: this.headers });
+	getAllRoles(): Observable<any> {
+		return this.http.get(this.apiUrl, {});
 	}
 }

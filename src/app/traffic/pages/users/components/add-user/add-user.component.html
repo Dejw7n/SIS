@@ -18,36 +18,36 @@
 	<div nz-form>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Jméno" [(ngModel)]="Form.fnameInput" name="fname" type="text" id="fname" />
+				<input nz-input placeholder="Jméno" [(ngModel)]="Form.name" name="fname" type="text" id="fname" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Přijmení" [(ngModel)]="Form.lnameInput" name="lname" type="text" id="lname" />
+				<input nz-input placeholder="Přijmení" [(ngModel)]="Form.lname" name="lname" type="text" id="lname" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Telefon" [(ngModel)]="Form.phoneInput" name="phone" type="text" id="phone" />
+				<input nz-input placeholder="Telefon" [(ngModel)]="Form.phone" name="phone" type="text" id="phone" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Email" [(ngModel)]="Form.emailInput" name="email" type="email" id="email" />
+				<input nz-input placeholder="Email" [(ngModel)]="Form.email" name="email" type="email" id="email" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Heslo" [(ngModel)]="Form.passwordInput" name="password" type="password" id="password" />
+				<input nz-input placeholder="Heslo" [(ngModel)]="Form.password" name="password" type="password" id="password" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
-			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Role" nzErrorType="Požadované" [(ngModel)]="Form.roleInput" class="w-full">
-				<nz-option *ngFor="let role of roles" [nzValue]="role.id" [nzLabel]="role.role"></nz-option>
+			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Role" nzErrorType="Požadované" [(ngModel)]="Form.role_id" class="w-full">
+				<nz-option *ngFor="let role of roles" [nzValue]="role.id" [nzLabel]="role.name"></nz-option>
 			</nz-select>
 		</nz-form-item>
 		<nz-form-item>
-			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Středisko" nzErrorType="Požadované" [(ngModel)]="Form.centerInput" class="w-full">
+			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Středisko" nzErrorType="Požadované" [(ngModel)]="Form.center_id" class="w-full">
 				<nz-option *ngFor="let center of centers" [nzValue]="center.id" [nzLabel]="center.name"></nz-option>
 			</nz-select>
 		</nz-form-item>

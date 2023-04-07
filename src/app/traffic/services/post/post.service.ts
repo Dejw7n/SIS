@@ -24,10 +24,16 @@ export class PostService {
 		return this.http.get(this.filePostApiUrl + "/" + postId, {});
 	}
 	editPost(postId: number, postData: any) {
-		postData.userId = this.authService.getUserData().id;
-		this.http.put(this.postApiUrl + postId, postData).subscribe();
+		this.http.put(this.postApiUrl + "/" + postId, postData).subscribe();
 	}
 	deletePost(postId: number) {
-		this.http.delete(this.postApiUrl + postId).subscribe();
+		return this.http.delete(this.postApiUrl + "/" + postId).subscribe(
+			(response) => {
+				return true;
+			},
+			(error) => {
+				return false;
+			}
+		);
 	}
 }

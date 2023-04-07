@@ -18,11 +18,11 @@ export class EditPostComponent implements OnInit {
 	centers: CenterModel[] = [];
 	priorities: PriorityModel[] = [];
 	Form = {
-		titleInput: null,
+		title: null,
 		filesDefer: "",
-		textInput: null,
-		priorityInput: null,
-		centerInput: null,
+		content: null,
+		priority_id: null,
+		center_id: null,
 	};
 
 	constructor(private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
@@ -31,11 +31,11 @@ export class EditPostComponent implements OnInit {
 		this.postService.getPost(this.postId).subscribe((res) => {
 			this.postData = res;
 			this.Form = {
-				titleInput: this.postData.title,
+				title: this.postData.title,
 				filesDefer: "",
-				textInput: this.postData.text,
-				priorityInput: this.postData.priority,
-				centerInput: this.postData.center_id,
+				content: this.postData.content,
+				priority_id: this.postData.priority_id,
+				center_id: this.postData.center_id,
 			};
 		});
 		this.centerService.getAllCenters().subscribe((res) => {
@@ -51,7 +51,7 @@ export class EditPostComponent implements OnInit {
 	}
 
 	send(): void {
-		if (this.Form.titleInput != null && this.Form.textInput != null && this.Form.centerInput != null && this.Form.priorityInput != null) {
+		if (this.Form.title != null && this.Form.content != null && this.Form.center_id != null && this.Form.priority_id != null) {
 			this.postService.editPost(this.postId, this.Form);
 			this.dialogRef.close();
 			location.reload();

@@ -18,7 +18,7 @@
 	<div nz-form>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Nadpis" [(ngModel)]="Form.TitleInput" name="title" type="text" id="title" />
+				<input nz-input placeholder="Nadpis" [(ngModel)]="Form.title" name="title" type="text" id="title" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
@@ -28,12 +28,14 @@
 						height: 500,
 						menubar: false,
 						plugins: ['advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount'],
-						toolbar: 'undo redo | formatselect | bold italic backcolor | \
+						toolbar:
+							'undo redo | formatselect | bold italic backcolor | \
        alignleft aligncenter alignright alignjustify | \
        bullist numlist outdent indent | removeformat | help'
 					}"
+					[(ngModel)]="Form.content"
 				></editor>
-				<!-- <textarea [(ngModel)]="Form.TextInput" id="tinymce" cols="30" rows="10" class="w-full"></textarea> -->
+				<!-- <textarea [(ngModel)]="Form.content" id="tinymce" cols="30" rows="10" class="w-full"></textarea> -->
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
@@ -42,13 +44,13 @@
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
-			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Středisko" nzErrorType="Požadované" [(ngModel)]="Form.CenterInput" class="w-full">
+			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Středisko" nzErrorType="Požadované" [(ngModel)]="Form.center_id" class="w-full">
 				<nz-option *ngFor="let center of centers" [nzValue]="center.id" [nzLabel]="center.name"></nz-option>
 			</nz-select>
 		</nz-form-item>
 		<nz-form-item>
-			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Priorita" [(ngModel)]="Form.PriorityInput" class="w-full">
-				<nz-option *ngFor="let priority of priorities" [nzValue]="priority.id" [nzLabel]="priority.id + '-' + priority.priority"></nz-option>
+			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Priorita" [(ngModel)]="Form.priority_id" class="w-full">
+				<nz-option *ngFor="let priority of priorities" [nzValue]="priority.id" [nzLabel]="priority.name"></nz-option>
 			</nz-select>
 		</nz-form-item>
 	</div>

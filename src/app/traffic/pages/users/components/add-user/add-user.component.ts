@@ -12,6 +12,7 @@ import { UserService } from "src/app/traffic/services/user/user.service";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CenterService } from "src/app/traffic/services/center/center.service";
+import { RoleService } from "src/app/traffic/services/role/role.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 	isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,31 +34,38 @@ export class AddUserComponent implements OnInit {
 	centers: CenterModel[] = [];
 	roles: RoleModel[] = [];
 	Form = {
-		fnameInput: null,
-		lnameInput: null,
-		phoneInput: null,
-		emailInput: null,
-		roleInput: null,
-		centerInput: null,
-		passwordInput: null,
+		name: null,
+		lname: null,
+		phone: null,
+		email: null,
+		role_id: null,
+		center_id: null,
+		password: null,
 	};
 
-	constructor(private centerService: CenterService, private postService: PostService, private userService: UserService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private roleService: RoleService, private centerService: CenterService, private userService: UserService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
 		this.centerService.getAllCenters().subscribe((res) => {
 			this.centers = res;
 		});
-		this.userService.getAllRoles().subscribe((res) => {
+		this.roleService.getAllRoles().subscribe((res) => {
 			this.roles = res;
 		});
 	}
 
-	send() {
-		if (this.Form.fnameInput != null && this.Form.lnameInput != null && this.Form.phoneInput != null && this.Form.emailInput != null && this.Form.roleInput != null && this.Form.centerInput != null && this.Form.passwordInput) {
-			this.userService.createUser(this.Form);
-			this.close();
-			location.reload();
+	async send() {
+		if (this.Form.name != null && this.Form.lname != null && this.Form.phone != null && this.Form.email != null && this.Form.role_id != null && this.Form.center_id != null && this.Form.password) {
+			this.userService.createUser(this.Form).subscribe(
+				(res) => {
+					this.close();
+					location.reload();
+				},
+				(err) => {
+					console.log(err);
+					this.snackBar.open("Nepodařilo se vytvořit uživatele. Chyba: " + JSON.stringify(err.error), "X", { panelClass: ["error"] });
+				}
+			);
 		} else {
 			this.snackBar.open("Nejsou vyplněny všechny povinné údaje.", "X", { panelClass: ["error"] });
 		}

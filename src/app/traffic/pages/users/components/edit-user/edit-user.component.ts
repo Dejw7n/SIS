@@ -8,6 +8,7 @@ import { PostService } from "src/app/traffic/services/post/post.service";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CenterService } from "src/app/traffic/services/center/center.service";
+import { RoleService } from "src/app/traffic/services/role/role.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 	isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -32,43 +33,43 @@ export class EditUserComponent implements OnInit {
 	centers: CenterModel[] = [];
 	roles: RoleModel[] = [];
 	Form = {
-		fnameInput: null,
-		lnameInput: null,
-		phoneInput: null,
-		emailInput: null,
-		roleInput: null,
-		centerInput: null,
-		passwordInput: null,
+		name: null,
+		lname: null,
+		phone: null,
+		email: null,
+		role_id: null,
+		center_id: null,
+		password: null,
 	};
 
-	constructor(private centerService: CenterService, private postService: PostService, private userService: UserService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private roleService: RoleService, private centerService: CenterService, private postService: PostService, private userService: UserService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
 		this.userService.getUser(this.userId).subscribe((res) => {
 			this.userData = res;
 			this.Form = {
-				fnameInput: this.userData.name,
-				lnameInput: this.userData.lname,
-				phoneInput: this.userData.phone,
-				emailInput: this.userData.email,
-				roleInput: this.userData.role_id,
-				centerInput: this.userData.center_id,
-				passwordInput: null,
+				name: this.userData.name,
+				lname: this.userData.lname,
+				phone: this.userData.phone,
+				email: this.userData.email,
+				role_id: this.userData.role_id,
+				center_id: this.userData.center_id,
+				password: null,
 			};
 		});
 		this.centerService.getAllCenters().subscribe((res) => {
 			this.centers = res;
 		});
-		this.userService.getAllRoles().subscribe((res) => {
+		this.roleService.getAllRoles().subscribe((res) => {
 			this.roles = res;
 		});
 	}
 
 	send() {
-		if (this.Form.fnameInput != null && this.Form.lnameInput != null && this.Form.phoneInput != null && this.Form.emailInput != null && this.Form.roleInput != null && this.Form.centerInput != null) {
+		if (this.Form.name != null && this.Form.lname != null && this.Form.phone != null && this.Form.email != null && this.Form.role_id != null && this.Form.center_id != null) {
 			this.userService.editUser(this.userId, this.Form);
-			this.close();
-			location.reload();
+			// this.close();
+			// location.reload();
 		} else {
 			this.snackBar.open("Nejsou vyplněny všechny povinné údaje.", "X", { panelClass: ["error"] });
 		}

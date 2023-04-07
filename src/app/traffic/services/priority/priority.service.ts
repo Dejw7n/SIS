@@ -7,12 +7,12 @@ import { environment } from "src/environments/environment";
 	providedIn: "root",
 })
 export class PriorityService {
-	private priorityApiUrl = environment.API_URL + "/Priority/";
+	private priorityApiUrl = environment.API_URL + "/priority";
 	private headers = { "content-type": "application/json" };
 
 	constructor(private http: HttpClient) {}
 
 	getAllPriorities(): Observable<any> {
-		return this.http.post(this.priorityApiUrl + "getPriorities", {}, { headers: this.headers });
+		return this.http.get(this.priorityApiUrl, { headers: this.headers });
 	}
 }
