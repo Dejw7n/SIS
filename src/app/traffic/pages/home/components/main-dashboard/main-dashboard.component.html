@@ -29,7 +29,7 @@
 <ng-template #displaying>
 	<div class="flex flex-wrap gap-10">
 		<div class="flex flex-grow h-auto rounded-lg overflow-hidden shadow-lg bg-white" *ngFor="let post of posts | postFilter : center">
-			<div class="testt max-w-[8px] w-full isolate" [ngClass]="{ 'bg-yellow-400': post.priority == 2, 'bg-red-500': post.priority == 3 }"></div>
+			<div class="testt max-w-[8px] w-full isolate" [ngClass]="{ 'bg-yellow-400': post.priority_id == 2, 'bg-red-500': post.priority_id == 3 }"></div>
 			<div class="w-full grid gap-8 p-8">
 				<div class="w-full h-fit grid gap-4">
 					<div class="flex">
@@ -65,36 +65,36 @@
 						<div class="text-black" [innerHTML]="post.content"></div>
 					</div>
 					<div class="flex border-t-2 py-4">
-						<div class="flex flex-wrap-reverse rounded-lg bg-violet-50">
-							<!-- <div *ngFor="let filePost of getFilesOfPost(post.id) | async" (click)="downloadFile(filePost.uuid)" class="flex px-4 py-3 rounded-lg cursor-pointer hover:bg-violet-100">
+						<div class="flex gap-2 flex-wrap-reverse rounded-lg">
+							<div *ngFor="let postFile of post.files" (click)="downloadFile(postFile.id)" class="flex px-4 py-3 rounded-lg cursor-pointer bg-blue-50 hover:bg-blue-100">
 								<div class="flex h-10">
 									<div class="">
-										<img src="/assets/icons/mime/{{ getPostFileIcon(filePost.name) }}.png" alt="" class="h-full" />
+										<img src="/assets/icons/mime/{{ getPostFileIcon(postFile.name) }}.png" alt="" class="h-full" />
 									</div>
 									<div class="grid ml-1 py-1">
-										<p class="font-semibold leading-none">{{ filePost.name }}</p>
-										<p class="mt-auto text-neutral-500 leading-none">{{ humanSizeReadable(filePost.size) }}</p>
+										<p class="font-semibold leading-none">{{ postFile.name }}</p>
+										<p class="mt-auto text-neutral-500 leading-none">{{ humanSizeReadable(postFile.size) }}</p>
 									</div>
 								</div>
-							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="flex h-10 mt-auto">
 					<div class="flex gap-2 w-full">
 						<div class="h-full overflow-hidden rounded-full">
-							<img src="/assets/images/profile.jpg" alt="" class="h-full" />
+							<img src="/assets/images/profile.webp" alt="" class="h-full" />
 						</div>
 						<div class="flex flex-col py-1">
-							<p class="text-sm text-zinc-500 font-semibold leading-none">Miroslav Douda</p>
+							<p class="text-sm text-zinc-500 font-semibold leading-none">{{ post.user.name }} {{ post.user.lname }}</p>
 							<div class="mt-auto">
-								<p class="text-sm text-stone-400 leading-none">15.08.2022</p>
+								<p class="text-sm text-stone-400 leading-none">{{ getReadeableDate(post.created_at) }}</p>
 							</div>
 						</div>
 					</div>
-					<div class="flex ml-auto" *ngIf="post.priority == 3">
+					<div class="flex ml-auto" *ngIf="post.created_at !== post.updated_at">
 						<div class="mt-auto">
-							<span class="ml-auto text-xs leading-none">Upraveno uživatelem {{ post.user_id }} v {{ post.date }}</span>
+							<span class="ml-auto text-xs leading-none">Naposledy upraveno {{ post.changes[post.changes.length - 1].user.name }} {{ post.changes[post.changes.length - 1].user.lname }} v {{ getReadeableDate(post.changes[post.changes.length - 1].created_at) }}</span>
 						</div>
 					</div>
 				</div>

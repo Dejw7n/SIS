@@ -1,9 +1,8 @@
 import { PostModel } from "./../../../../models/post.model";
 import { Router } from "@angular/router";
 import { FileService } from "./../../../../services/file/file.service";
-import { MimeService } from "./../../../../../core/services/mime/mime.service";
 import { Component, OnInit } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse } from "@angular/common/http";
 import { PostService } from "../../../../services/post/post.service";
 import { MatDialog } from "@angular/material/dialog";
 import { AddPostComponent } from "../add-post/add-post.component";
@@ -11,6 +10,7 @@ import { EditPostComponent } from "../edit-post/edit-post.component";
 import { PostHistoryComponent } from "../post-history/post-history.component";
 import { AuthService } from "src/app/core/services/auth/auth.service";
 import { Observable } from "rxjs/internal/Observable";
+import { formatDate } from "@angular/common";
 
 @Component({
 	selector: "app-main-dashboard",
@@ -51,6 +51,16 @@ export class MainDashboardComponent implements OnInit {
 				}
 			}
 		);
+		// this.postService.getFilesOfPost(1).subscribe(
+		// 	(Response) => {
+		// 		this.postFiles.push(Response);
+		// 	},
+		// 	(error) => {}
+		// );
+	}
+
+	getReadeableDate(dateInput: Date) {
+		return formatDate(dateInput, "d.M.yyyy hh:mm", "cs-CZ");
 	}
 
 	updateCenter(center: number, event: any) {
@@ -78,22 +88,11 @@ export class MainDashboardComponent implements OnInit {
 	}
 
 	humanSizeReadable(size: number) {
-		return this.fileService.humanFileSize(size);
+		return this.fileService.getHumanFileSize(size);
 	}
 
-	downloadFile(fileUuid: string) {
-		this.fileService.downloadFile(fileUuid).subscribe(
-			(Response) => {
-				window.open(Response.url, "_blank");
-			},
-			(error) => {
-				if (error instanceof HttpErrorResponse) {
-					if (error.status == 401) {
-						this.router.navigate(["/login"]);
-					}
-				}
-			}
-		);
+	downloadFile(id: number) {
+		this.fileService.download(id);
 	}
 
 	deletePost(id: number) {
