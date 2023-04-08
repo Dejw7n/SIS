@@ -26,15 +26,13 @@
 				<ng-template #displaying>
 					<div class="table">
 						<div class="table-row">
-							<div class="table-header">ID uživatele</div>
 							<div class="table-header">Název uživatele</div>
 							<div class="table-header">Datum změny</div>
 						</div>
-						<div *ngFor="let change of postChanges" class="table-row">
-							<div class="table-cell">{{ change.user_data.id }}</div>
-							<div class="table-cell">{{ change.user_data.name }} {{ change.user_data.lname }}</div>
+						<div *ngFor="let postChange of postChanges" class="table-row">
+							<div class="table-cell">{{ postChange.user.name }} {{ postChange.user.lname }}</div>
 							<div class="tabke-cell">
-								{{ humanDateReadable(change.date) }}
+								{{ humanDateReadable(postChange.created_at) }}
 							</div>
 						</div>
 					</div>

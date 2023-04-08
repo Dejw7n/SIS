@@ -2,8 +2,6 @@ import { Component, Inject, LOCALE_ID, OnInit, Self } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { PostService } from "src/app/traffic/services/post/post.service";
 import { formatDate } from "@angular/common";
-import { UserService } from "src/app/traffic/services/user/user.service";
-import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
 	selector: "app-post-history",
@@ -12,7 +10,6 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 export class PostHistoryComponent implements OnInit {
 	postId!: number;
-	postData: any;
 	postChanges: any;
 
 	loading = {
@@ -22,20 +19,13 @@ export class PostHistoryComponent implements OnInit {
 		},
 	};
 
-	constructor(private postService: PostService, private userService: UserService, @Inject(LOCALE_ID) private locale: string, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private postService: PostService, @Inject(LOCALE_ID) private locale: string, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
-		this.postService.getPost(this.postId).subscribe(
+		this.postService.getPostChanges(this.postId).subscribe(
 			(res) => {
 				this.loading.changes.response = true;
-				this.postData = res;
-				this.postChanges = JSON.parse(res.changes);
-				for (let i = 0; i < this.postChanges.length; i++) {
-					this.userService.getUser(this.postChanges[i].user_id).subscribe((res) => {
-						this.postChanges[i].user_data = res;
-					});
-				}
-				console.log(this.postChanges);
+				this.postChanges = res;
 			},
 			(error) => {
 				this.loading.changes.error = true;
