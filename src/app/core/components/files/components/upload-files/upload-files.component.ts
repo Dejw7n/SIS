@@ -1,137 +1,162 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { HttpClient, HttpEventType } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 import { FileService } from "src/app/traffic/services/file/file.service";
-import { HttpEventType, HttpResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { v4 as uuid } from "uuid";
 @Component({
 	selector: "app-upload-files",
 	templateUrl: "./upload-files.component.html",
 	styleUrls: ["./upload-files.component.sass"],
 })
-export class UploadFilesComponent implements OnInit {
-	@Output() onUploadFilesComplete = new EventEmitter<string[]>();
-	selectedFiles?: FileList;
-	uploadFilesCount = 0;
-	uploadedFilesName: string[] = [];
-	uploadedDeferUuid: string[] = [];
-	uploadedFilesCount = 0;
-	currentFile?: File;
-	progress = 0;
-	errorMessage: string | undefined;
-	maxSize = 0;
-	//fileInfos?: Observable<any>;
-	constructor(private FileService: FileService) {}
-	selectFile(event: any): void {
-		this.selectedFiles = event.target.files;
-		this.upload();
+export class UploadFilesComponent {
+	FILE_API_URL = environment.API_URL + "/file";
+
+	@Output() onUploadFilesComplete = new EventEmitter<any>();
+
+	files: File[] = [];
+	uploadStatus: string = "waiting";
+	progress: number = 0;
+	isRemainingTime: boolean = false;
+	remainingTime: number = 0;
+	uploadingSpeed: number = 0;
+
+	constructor(private fileService: FileService, private http: HttpClient) {}
+
+	onFileSelected(event: any): void {
+		this.files = event.target.files;
+		this.onUpload();
 	}
-	upload(): void {
-		//get the maximum allowed file size from the API
-		this.FileService.getFileSizeLimit().subscribe(
-			(event: any) => {
-				this.maxSize = event.message;
-				this.startUpload();
+
+	onUpload(): void {
+		if (this.files.length === 0) {
+			return;
+		}
+		this.uploadStatus = "uploading";
+		this.progress = 0;
+		this.isRemainingTime = false;
+		this.remainingTime = 0;
+		this.uploadingSpeed = 0;
+		let uploadedBytes = 0;
+		let totalBytes = 0;
+
+		const formData = new FormData();
+		for (let i = 0; i < this.files.length; i++) {
+			formData.append("files[]", this.files[i]);
+		}
+
+		const uploadReq = this.http.post(this.FILE_API_URL + "/upload", formData, {
+			reportProgress: true,
+			observe: "events",
+		});
+
+		let lastUploadedBytes = uploadedBytes;
+		let uploadNotResponding = 0;
+		const interval = setInterval(() => {
+			if (this.uploadStatus !== "uploading") {
+				clearInterval(interval);
+			}
+			this.uploadingSpeed = uploadedBytes - lastUploadedBytes;
+			if (this.uploadingSpeed > 0) {
+				this.isRemainingTime = true;
+				uploadNotResponding = 0;
+				this.remainingTime = (totalBytes - uploadedBytes) / (this.uploadingSpeed / 4);
+			} else {
+				uploadNotResponding++;
+				if (uploadNotResponding > 4) {
+					this.remainingTime = 0;
+				}
+			}
+			lastUploadedBytes = uploadedBytes;
+		}, 4000);
+		const interval2 = setInterval(() => {
+			if (this.uploadStatus !== "uploading") {
+				clearInterval(interval2);
+			}
+			if (this.remainingTime > 0) {
+				if (uploadNotResponding <= 2) {
+					this.remainingTime--;
+				}
+			}
+		}, 1000);
+
+		uploadReq.subscribe(
+			(event) => {
+				if (event.type === HttpEventType.UploadProgress) {
+					this.progress = Math.round(100 * (event.loaded / (event.total || 0)));
+					uploadedBytes = event.loaded;
+					totalBytes = event.total || 0;
+				} else if (event.type === HttpEventType.Response) {
+					console.log(event.body);
+					this.onUploadFilesComplete.emit(event.body);
+					this.uploadStatus = "completed";
+				}
 			},
-			(err: any) => {
-				this.maxSize = 9999999999999999; //request is sent and the API decides how to handle the file size
-				this.startUpload();
+			(error) => {
+				console.log(error);
+				this.uploadStatus = "error";
 			}
 		);
 	}
-	startUpload(): any {
-		if (this.selectedFiles) {
-			this.progress = 0;
-			this.uploadFilesCount = 0;
-			this.uploadedFilesCount = 0;
-			this.uploadedFilesName = [];
-			let passCheck = true;
-			//check if file length does not exceed limit
-			for (let i = 0; i < this.selectedFiles.length; i++) {
-				if (this.selectedFiles.item(i) !== null) {
-					let checkFile = this.selectedFiles.item(i);
-					this.uploadFilesCount++;
-					if (checkFile!.size > this.maxSize) {
-						passCheck = false;
-						let maxSizeMb = this.maxSize / 1024 / 1024;
-						this.errorMessage = checkFile!.name + ": Velikost souboru nesmí být větší než " + maxSizeMb + " MB!";
-					}
-				}
-			}
-			let uploadedFileNameArray: Array<string> = [];
-			//uploading to API
-			if (passCheck) {
-				for (let i = 0; i < this.selectedFiles.length; i++) {
-					const file: File | null = this.selectedFiles.item(i);
-					if (file) {
-						this.currentFile = file;
-						const deferUuid = uuid();
-						let uploadSpecifics = {
-							deferUuid: deferUuid,
-							fileAmount: this.selectedFiles.length,
-						};
-						let test = this.FileService.upload(this.currentFile, uploadSpecifics).subscribe(
-							(event: any) => {
-								if (event.type === HttpEventType.UploadProgress) {
-									this.progress = Math.round((100 * event.loaded) / event.total);
-									if (this.progress == 100 && !uploadedFileNameArray.includes(file!.name)) {
-										uploadedFileNameArray.push(file!.name);
-										this.uploadedFilesCount++;
-									}
-								} else if (event instanceof HttpResponse) {
-									this.errorMessage = event.body.message;
-								}
-							},
-							(err: any) => {
-								console.log(err);
-								this.progress = 0;
-								if (err.error && err.error.message) {
-									this.errorMessage = this.currentFile?.name + ": " + err.error.message;
-								} else {
-									this.errorMessage = this.currentFile?.name + ": Nepodařilo se nahrát soubor.";
-								}
-								this.currentFile = undefined;
-							}
-						);
-						this.uploadedDeferUuid.push(deferUuid);
-					}
-				}
-			}
-			this.uploadedFilesName = uploadedFileNameArray;
-			this.selectedFiles = undefined;
 
-			this.onUploadFilesComplete.emit(this.uploadedDeferUuid);
+	getUploadingSpeed(): string {
+		let uploadingSpeedMb = this.uploadingSpeed / 1048576;
+		if (uploadingSpeedMb > 0) {
+			return uploadingSpeedMb.toFixed(1) + " MB/s";
+		} else {
+			return "";
 		}
 	}
-	getUploadStatus() {
-		if (this.uploadedFilesCount == this.uploadFilesCount && this.uploadedFilesCount != 0) {
-			return "completedUpload";
-		} else {
-			if (this.errorMessage) {
-				return "uploadError";
-			} else if (this.selectedFiles) {
-				return "uploading";
-			} else {
-				return null;
+
+	getRemainingTime(): string {
+		if (this.remainingTime !== 0) {
+			let convertTime = this.convertTime(this.remainingTime);
+			if (convertTime !== "") {
+				return this.convertTime(this.remainingTime);
 			}
 		}
+		return "";
 	}
-	isUploadComplete() {
-		if (this.getUploadStatus() == "completedUpload") {
-			return true;
-		} else {
-			return false;
+
+	convertTime(timeInSeconds: number): string {
+		let result = "";
+		if (timeInSeconds > 3600) {
+			let hours = Math.floor(timeInSeconds / 3600);
+			result += `${hours}h `;
+			timeInSeconds %= 3600;
 		}
+		if (timeInSeconds > 60) {
+			let minutes = Math.floor(timeInSeconds / 60);
+			result += `${minutes}m `;
+			timeInSeconds %= 60;
+		}
+		if (timeInSeconds > 0) {
+			result += `${timeInSeconds.toFixed(0)}s `;
+		}
+		if (result.includes("Infinity")) {
+			return "";
+		}
+		return result;
+	}
+
+	humanFileSize(size: number) {
+		this.fileService.getHumanFileSize(size);
+	}
+
+	getUploadStatus() {
+		return this.uploadStatus;
 	}
 	getProgressColor() {
-		if (this.currentFile == null && this.errorMessage) {
+		if (this.getUploadStatus() == "error") {
 			return "#FF0000"; //red
 		} else {
-			if (this.currentFile && this.progress == 100) {
+			if (this.getUploadStatus() == "completed") {
 				return "#4ade80"; //green
 			} else {
-				return "#9ca3af"; //gray
+				if (this.getUploadStatus() == "uploading") {
+					return "#3b82f6"; //blue
+				} else {
+					return "#9ca3af"; //gray
+				}
 			}
 		}
 	}
-	ngOnInit(): void {}
 }

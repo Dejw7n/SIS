@@ -7,42 +7,44 @@ import { environment } from "../../../../environments/environment";
 	providedIn: "root",
 })
 export class FileService {
-	private apiURl = environment.API_URL;
+	private FILE_API_URL = environment.API_URL + "/file";
 	constructor(private http: HttpClient) {}
 	headers = { "content-type": "application/json" };
 
 	getFileSizeLimit() {
-		return this.http.get(`${this.apiURl}/fileSizeLimit`);
-	}
-
-	upload(file: File, uploadSpecifics: any): Observable<HttpEvent<any>> {
-		const formData: FormData = new FormData();
-		formData.append("file", file);
-		formData.append("deferUuid", uploadSpecifics.deferUuid);
-		formData.append("fileAmount", uploadSpecifics.fileAmount);
-		const req = new HttpRequest("POST", `${this.apiURl}/upload`, formData, {
-			reportProgress: true,
-			responseType: "json",
-		});
-		return this.http.request(req);
+		return this.http.get(`${this.FILE_API_URL}/fileSizeLimit`);
 	}
 
 	getFiles(): Observable<any> {
-		return this.http.get(`${this.apiURl}/files`);
+		return this.http.get(`${this.FILE_API_URL}`);
 	}
 
-	downloadFile(fileUuid: string): Observable<any> {
-		return this.http.get(this.apiURl + "/FileApi/downloadUrl/" + fileUuid, {});
+	download(id: number) {
+		this.http.get<any>(this.FILE_API_URL + "/" + id, { responseType: "json" }).subscribe((res) => {
+			let fileName = res.name;
+			this.http.get(this.FILE_API_URL + "/" + id + "/download", { responseType: "blob" }).subscribe((blob) => {
+				const file = new Blob([blob], { type: "application/" + blob.type });
+				const fileURL = URL.createObjectURL(file);
+				const a = document.createElement("a");
+				a.style.display = "none";
+				document.body.appendChild(a);
+				a.href = fileURL;
+				a.download = fileName;
+				a.click();
+				window.URL.revokeObjectURL(fileURL);
+				document.body.removeChild(a);
+			});
+		});
 	}
 
-	humanFileSize(bytes: number, si = false, dp = 1) {
+	getHumanFileSize(bytes: number, si = false, dp = 1) {
 		const thresh = si ? 1000 : 1024;
 
 		if (Math.abs(bytes) < thresh) {
 			return bytes + " B";
 		}
 
-		const units = si ? ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"] : ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
+		const units = si ? ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"] : ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 		let u = -1;
 		const r = 10 ** dp;
 
