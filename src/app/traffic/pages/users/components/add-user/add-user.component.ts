@@ -38,7 +38,7 @@ export class AddUserComponent implements OnInit {
 		lname: null,
 		phone: null,
 		email: null,
-		role_id: null,
+		role_id: 3,
 		center_id: null,
 		password: null,
 	};
@@ -55,7 +55,7 @@ export class AddUserComponent implements OnInit {
 	}
 
 	async send() {
-		if (this.Form.name != null && this.Form.lname != null && this.Form.phone != null && this.Form.email != null && this.Form.role_id != null && this.Form.center_id != null && this.Form.password) {
+		if (this.Form.name != null && this.Form.lname != null && this.Form.email != null && this.Form.role_id != null && this.Form.center_id != null && this.Form.password) {
 			this.userService.createUser(this.Form).subscribe(
 				(res) => {
 					this.close();
