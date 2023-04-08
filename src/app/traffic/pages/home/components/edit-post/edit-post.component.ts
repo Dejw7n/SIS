@@ -19,7 +19,6 @@ export class EditPostComponent implements OnInit {
 	priorities: PriorityModel[] = [];
 	Form = {
 		title: null,
-		filesDefer: "",
 		content: null,
 		priority_id: null,
 		center_id: null,
@@ -32,7 +31,6 @@ export class EditPostComponent implements OnInit {
 			this.postData = res;
 			this.Form = {
 				title: this.postData.title,
-				filesDefer: "",
 				content: this.postData.content,
 				priority_id: this.postData.priority_id,
 				center_id: this.postData.center_id,
@@ -46,15 +44,17 @@ export class EditPostComponent implements OnInit {
 		});
 	}
 
-	onUploadFilesComplete(event: any) {
-		this.Form.filesDefer = JSON.stringify(event);
-	}
-
 	send(): void {
 		if (this.Form.title != null && this.Form.content != null && this.Form.center_id != null && this.Form.priority_id != null) {
-			this.postService.editPost(this.postId, this.Form);
-			this.dialogRef.close();
-			location.reload();
+			this.postService.update(this.postId, this.Form).subscribe(
+				(res) => {
+					this.dialogRef.close();
+					location.reload();
+				},
+				(error) => {
+					this.snackBar.open("Chyba při odesílání formuláře.", "X", { panelClass: ["error"] });
+				}
+			);
 		} else {
 			this.snackBar.open("Nejsou vyplněny všechny povinné údaje.", "X", { panelClass: ["error"] });
 		}

@@ -37,11 +37,11 @@
 				></editor>
 			</nz-form-control>
 		</nz-form-item>
-		<nz-form-item>
+		<!-- <nz-form-item>
 			<nz-form-control>
 				<app-upload-files class="w-full" (onUploadFilesComplete)="onUploadFilesComplete($event)"></app-upload-files>
 			</nz-form-control>
-		</nz-form-item>
+		</nz-form-item> -->
 		<nz-form-item>
 			<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Středisko" nzErrorType="Požadované" [(ngModel)]="Form.center_id" class="w-full">
 				<nz-option *ngFor="let center of centers" [nzValue]="center.id" [nzLabel]="center.name"></nz-option>
