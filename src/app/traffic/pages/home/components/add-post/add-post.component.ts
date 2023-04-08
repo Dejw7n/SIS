@@ -22,12 +22,13 @@ export class AddPostComponent implements OnInit {
 
 	centers: CenterModel[] = [];
 	priorities: PriorityModel[] = [];
-	Form = {
+	uploadSession: string = "";
+	Form: any = {
 		title: null,
-		FilesDefer: "",
 		content: null,
 		priority_id: 1,
 		center_id: 1,
+		session_files: null,
 	};
 
 	constructor(private authService: AuthService, private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private http: HttpClient, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
@@ -41,19 +42,28 @@ export class AddPostComponent implements OnInit {
 		});
 	}
 
+	onFileSelected(event: { target: { files: FileList } }) {
+		const files: FileList = event.target.files;
+		const formData = new FormData();
+		for (let i = 0; i < files.length; i++) {
+			formData.append(`file[${i}]`, files[i]);
+		}
+		// Call the API service method to upload the files
+	}
 	onUploadFilesComplete(event: any) {
-		this.Form.FilesDefer = JSON.stringify(event);
+		this.Form.session_files = event;
+		console.log("onUploadFilesComplete: " + event);
 	}
 
 	send(): void {
 		if (this.Form.title != null && this.Form.content != null && this.Form.center_id != null && this.Form.priority_id != null) {
-			this.http.post(this.apiUrl, this.Form).subscribe(
+			this.postService.create(this.Form).subscribe(
 				(res) => {
 					this.dialogRef.close();
 					location.reload();
 				},
 				(err) => {
-					this.snackBar.open("Něco se pokazilo.", "X", { panelClass: ["error"] });
+					this.snackBar.open("Chyba při odesílání formuláře.", "X", { panelClass: ["error"] });
 				}
 			);
 		} else {
