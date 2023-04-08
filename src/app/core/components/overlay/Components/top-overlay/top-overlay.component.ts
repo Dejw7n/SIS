@@ -25,6 +25,10 @@ export class TopOverlayComponent implements OnInit {
 		}
 	}
 
+	logout() {
+		this.authService.logout();
+	}
+
 	getWeekNumber(thisDate: Date) {
 		let startDate: Date = new Date(thisDate.getFullYear(), 0, 1);
 		let test = thisDate.getTime() - startDate.getTime();

@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { AuthService } from "src/app/core/services/auth/auth.service";
 
 @Component({
@@ -8,7 +7,7 @@ import { AuthService } from "src/app/core/services/auth/auth.service";
 	styleUrls: ["./menu-overlay.component.sass"],
 })
 export class MenuOverlayComponent implements OnInit {
-	constructor(private router: Router, private authService: AuthService) {}
+	constructor(private authService: AuthService) {}
 	userRole: number = 0;
 
 	menuItems: any[] = [
@@ -39,14 +38,13 @@ export class MenuOverlayComponent implements OnInit {
 	];
 	menuLogout: any = {
 		label: "Odhlásit se",
-		href: "#",
+		href: "/logout",
 		iconType: "logout",
 		requiredRole: 0,
 	};
 
 	logout() {
-		localStorage.clear();
-		this.router.navigate(["/login"]);
+		this.authService.logout();
 	}
 
 	ngOnInit(): void {

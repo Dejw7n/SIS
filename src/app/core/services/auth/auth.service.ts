@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from "@angular/router";
 
 @Injectable({
 	providedIn: "root",
@@ -9,7 +10,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AuthService {
 	private apiUrl: string = environment.API_URL + "/auth/";
 
-	constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+	constructor(private router: Router, private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
 	loginUser(user: any) {
 		return this.http.post<any>(this.apiUrl + "login", user);
@@ -42,5 +43,10 @@ export class AuthService {
 
 	getToken() {
 		return localStorage.getItem("access_token");
+	}
+
+	logout() {
+		localStorage.clear();
+		this.router.navigate(["/login"]);
 	}
 }
