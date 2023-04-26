@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	API_URL: "http://91.224.90.56:30012",
+	API_URL: "https://sis-api.spsul.cz/api",
 };
