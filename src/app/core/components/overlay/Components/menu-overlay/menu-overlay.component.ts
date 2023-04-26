@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { AuthService } from "src/app/core/services/auth/auth.service";
 
 @Component({
@@ -7,6 +7,8 @@ import { AuthService } from "src/app/core/services/auth/auth.service";
 	styleUrls: ["./menu-overlay.component.sass"],
 })
 export class MenuOverlayComponent implements OnInit {
+	@Output() myFunctionCall = new EventEmitter();
+
 	constructor(private authService: AuthService) {}
 	userRole: number = 0;
 
