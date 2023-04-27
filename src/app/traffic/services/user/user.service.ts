@@ -25,7 +25,7 @@ export class UserService {
 		return this.http.get(this.apiUrl + "/getAllRoles", {});
 	}
 	createUser(userData: any) {
-		return this.http.post(this.apiUrl + "/", userData);
+		return this.http.post(this.apiUrl, userData);
 	}
 	editUser(userId: number, userData: any) {
 		this.http.put(this.apiUrl + "/" + userId, userData).subscribe();
