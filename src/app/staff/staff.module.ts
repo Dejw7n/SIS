@@ -9,7 +9,7 @@ import { AddUserComponent } from "./pages/users/components/add-user/add-user.com
 import { EditUserComponent } from "./pages/users/components/edit-user/edit-user.component";
 import { SharedModule } from "../shared/shared.module";
 import { FilesModule } from "../core/components/files/files.module";
-import { OverlayModule } from "@angular/cdk/overlay/overlay-module";
+import { OverlayModule } from "@angular/cdk/overlay";
 import { HomeModule } from "./pages/home/home.module";
 import { NzEmptyModule } from "ng-zorro-antd/empty";
 import { NzDrawerModule } from "ng-zorro-antd/drawer";
