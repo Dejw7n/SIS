@@ -1,18 +1,18 @@
-import { EditUserComponent } from "./../edit-user/edit-user.component";
-import { AddUserComponent } from "./../add-user/add-user.component";
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../../../services/user/user.service";
-import { UserModel } from "../../../../../staff/models/user.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
+import { UserService } from "../../services/user/user.service";
+import { AddUserComponent } from "./components/add-user/add-user.component";
+import { EditUserComponent } from "./components/edit-user/edit-user.component";
+import { UserModel } from "../../models/user.model";
 
 @Component({
-	selector: "app-all-users",
-	templateUrl: "./all-users.component.html",
-	styleUrls: ["./all-users.component.sass"],
+	selector: "app-users",
+	templateUrl: "./users.component.html",
+	styleUrls: ["./users.component.sass"],
 })
-export class AllUsersComponent implements OnInit {
+export class UsersComponent implements OnInit {
 	Users: UserModel[] = [];
 	searchText: string = "";
 	center = 0;
