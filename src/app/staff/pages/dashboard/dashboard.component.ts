@@ -1,23 +1,23 @@
-import { PostModel } from "../../../../../staff/models/post.model";
+import { PostModel } from "../../models/post.model";
 import { Router } from "@angular/router";
-import { FileService } from "./../../../../services/file/file.service";
+import { FileService } from "../../services/file/file.service";
 import { Component, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { PostService } from "../../../../services/post/post.service";
+import { PostService } from "../../services/post/post.service";
 import { MatDialog } from "@angular/material/dialog";
-import { AddPostComponent } from "../add-post/add-post.component";
-import { EditPostComponent } from "../edit-post/edit-post.component";
-import { PostHistoryComponent } from "../post-history/post-history.component";
+import { AddPostComponent } from "./components/add-post/add-post.component";
+import { EditPostComponent } from "./components/edit-post/edit-post.component";
+import { PostHistoryComponent } from "./components/post-history/post-history.component";
 import { AuthService } from "src/app/core/services/auth/auth.service";
 import { Observable } from "rxjs/internal/Observable";
 import { formatDate } from "@angular/common";
 
 @Component({
-	selector: "app-main-dashboard",
-	templateUrl: "./main-dashboard.component.html",
-	styleUrls: ["./main-dashboard.component.sass"],
+	selector: "app-dashboard",
+	templateUrl: "./dashboard.component.html",
+	styleUrls: ["./dashboard.component.sass"],
 })
-export class MainDashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 	posts: PostModel[] = [];
 	center: number = 0;
 	loading = {

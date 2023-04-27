@@ -10,7 +10,7 @@ import { EditUserComponent } from "./pages/users/components/edit-user/edit-user.
 import { SharedModule } from "../shared/shared.module";
 import { FilesModule } from "../core/components/files/files.module";
 import { OverlayModule } from "@angular/cdk/overlay";
-import { HomeModule } from "./pages/home/home.module";
+import { DashboardModule } from "./pages/dashboard/dashboard.module";
 import { NzEmptyModule } from "ng-zorro-antd/empty";
 import { NzDrawerModule } from "ng-zorro-antd/drawer";
 import { FormsModule } from "@angular/forms";
@@ -26,7 +26,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
 	declarations: [FilesComponent, LoginPageComponent, IssuesComponent, AllUsersComponent, UserFilterPipe, AddUserComponent, EditUserComponent],
-	imports: [SharedModule, FilesModule, OverlayModule, HomeModule, CommonModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
+	imports: [SharedModule, FilesModule, OverlayModule, DashboardModule, CommonModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
 	exports: [LoginPageComponent, UserFilterPipe, AllUsersComponent],
 })
 export class StaffModule {}

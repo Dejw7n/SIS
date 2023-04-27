@@ -1,12 +1,12 @@
-import { SharedModule } from "./../../../shared/shared.module";
-import { FilesModule } from "./../../../core/components/files/files.module";
+import { SharedModule } from "../../../shared/shared.module";
+import { FilesModule } from "../../../core/components/files/files.module";
 import { NzSelectModule } from "ng-zorro-antd/select";
 import { NzFormModule } from "ng-zorro-antd/form";
-import { PostFilterPipe } from "./../../pipes/post-filter/post-filter.pipe";
-import { OverlayModule } from "./../../../core/components/overlay/overlay.module";
+import { PostFilterPipe } from "../../pipes/post-filter/post-filter.pipe";
+import { OverlayModule } from "../../../core/components/overlay/overlay.module";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MainDashboardComponent } from "./components/main-dashboard/main-dashboard.component";
+import { DashboardComponent } from "./dashboard.component";
 import { NzEmptyModule } from "ng-zorro-antd/empty";
 import { MatMenuModule } from "@angular/material/menu";
 import { EditPostComponent } from "./components/edit-post/edit-post.component";
@@ -22,7 +22,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { PostHistoryComponent } from "./components/post-history/post-history.component";
 
 @NgModule({
-	declarations: [MainDashboardComponent, PostFilterPipe, AddPostComponent, EditPostComponent, PostHistoryComponent],
+	declarations: [DashboardComponent, PostFilterPipe, AddPostComponent, EditPostComponent, PostHistoryComponent],
 	imports: [SharedModule, FilesModule, EditorModule, CommonModule, OverlayModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
 })
-export class HomeModule {}
+export class DashboardModule {}
