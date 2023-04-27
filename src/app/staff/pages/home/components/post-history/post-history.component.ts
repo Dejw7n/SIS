@@ -1,6 +1,6 @@
 import { Component, Inject, LOCALE_ID, OnInit, Self } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { PostService } from "src/app/traffic/services/post/post.service";
+import { PostService } from "src/app/staff/services/post/post.service";
 import { formatDate } from "@angular/common";
 
 @Component({

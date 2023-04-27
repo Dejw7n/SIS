@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router";
 import { AuthService } from "src/app/core/services/auth/auth.service";
-import { UserService } from "src/app/traffic/services/user/user.service";
+import { UserService } from "src/app/staff/services/user/user.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({

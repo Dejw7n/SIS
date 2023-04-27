@@ -2,7 +2,7 @@ import { EditUserComponent } from "./../edit-user/edit-user.component";
 import { AddUserComponent } from "./../add-user/add-user.component";
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../../../services/user/user.service";
-import { UserModel } from "../../../../models/user.model";
+import { UserModel } from "../../../../../staff/models/user.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";

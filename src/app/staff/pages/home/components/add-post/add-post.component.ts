@@ -1,13 +1,13 @@
 import { Component, OnInit, Self } from "@angular/core";
-import { CenterModel } from "../../../../models/center.model";
-import { PriorityModel } from "../../../../models/priority.model";
+import { CenterModel } from "../../../../../staff/models/center.model";
+import { PriorityModel } from "../../../../../staff/models/priority.model";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { PriorityService } from "src/app/traffic/services/priority/priority.service";
-import { PostService } from "src/app/traffic/services/post/post.service";
-import { CenterService } from "src/app/traffic/services/center/center.service";
+import { PriorityService } from "src/app/staff/services/priority/priority.service";
+import { PostService } from "src/app/staff/services/post/post.service";
+import { CenterService } from "src/app/staff/services/center/center.service";
 import { AuthService } from "src/app/core/services/auth/auth.service";
 
 class DialogData {}

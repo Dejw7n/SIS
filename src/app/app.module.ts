@@ -16,10 +16,10 @@ import { ErrorsModule } from "./core/components/errors/errors.module";
 import { OverlayModule } from "./core/components/overlay/overlay.module";
 import { AuthGuard } from "./core/guards/auth/auth.guard";
 import { TokenInterceptor } from "./core/interceptors/token/token.interceptor";
-import { TrafficModule } from "./traffic/traffic.module";
 import { MatIconModule } from "@angular/material/icon";
 import { FooterComponent } from "./core/components/footer/footer.component";
 import { JwtModule } from "@auth0/angular-jwt";
+import { StaffModule } from "./staff/staff.module";
 
 registerLocaleData(cs);
 
@@ -31,7 +31,7 @@ registerLocaleData(cs);
 				tokenGetter: () => localStorage.getItem("access_token"),
 			},
 		}),
-		TrafficModule,
+		StaffModule,
 		CommonModule,
 		BrowserModule,
 		AppRoutingModule,

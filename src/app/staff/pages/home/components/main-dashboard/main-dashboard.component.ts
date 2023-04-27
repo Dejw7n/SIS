@@ -1,4 +1,4 @@
-import { PostModel } from "./../../../../models/post.model";
+import { PostModel } from "../../../../../staff/models/post.model";
 import { Router } from "@angular/router";
 import { FileService } from "./../../../../services/file/file.service";
 import { Component, OnInit } from "@angular/core";

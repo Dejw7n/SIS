@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { HttpClient, HttpEventType } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { FileService } from "src/app/traffic/services/file/file.service";
+import { FileService } from "src/app/staff/services/file/file.service";
 @Component({
 	selector: "app-upload-files",
 	templateUrl: "./upload-files.component.html",

@@ -1,11 +1,11 @@
 import { Component, OnInit, Self } from "@angular/core";
-import { CenterModel } from "src/app/traffic/models/center.model";
-import { PriorityModel } from "src/app/traffic/models/priority.model";
+import { CenterModel } from "src/app/staff/models/center.model";
+import { PriorityModel } from "src/app/staff/models/priority.model";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { PriorityService } from "src/app/traffic/services/priority/priority.service";
-import { PostService } from "src/app/traffic/services/post/post.service";
-import { CenterService } from "src/app/traffic/services/center/center.service";
+import { PriorityService } from "src/app/staff/services/priority/priority.service";
+import { PostService } from "src/app/staff/services/post/post.service";
+import { CenterService } from "src/app/staff/services/center/center.service";
 
 @Component({
 	selector: "app-edit-post",
