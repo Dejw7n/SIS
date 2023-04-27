@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { AuthService } from "src/app/core/services/auth/auth.service";
+import { AuthService } from "src/app/auth/services/auth/auth.service";
 
 @Component({
 	selector: "app-menu-overlay",

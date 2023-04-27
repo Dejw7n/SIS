@@ -8,7 +8,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { PriorityService } from "src/app/staff/services/priority/priority.service";
 import { PostService } from "src/app/staff/services/post/post.service";
 import { CenterService } from "src/app/staff/services/center/center.service";
-import { AuthService } from "src/app/core/services/auth/auth.service";
+import { AuthService } from "src/app/auth/services/auth/auth.service";
 
 class DialogData {}
 

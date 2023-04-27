@@ -8,7 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { AddPostComponent } from "./components/add-post/add-post.component";
 import { EditPostComponent } from "./components/edit-post/edit-post.component";
 import { PostHistoryComponent } from "./components/post-history/post-history.component";
-import { AuthService } from "src/app/core/services/auth/auth.service";
+import { AuthService } from "src/app/auth/services/auth/auth.service";
 import { Observable } from "rxjs/internal/Observable";
 import { formatDate } from "@angular/common";
 

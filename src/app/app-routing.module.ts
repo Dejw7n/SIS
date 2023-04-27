@@ -5,11 +5,11 @@ import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./staff/pages/dashboard/dashboard.component";
 import { AllUsersComponent } from "./staff/pages/users/components/all-users/all-users.component";
 import { NotFoundComponent } from "./core/components/errors/not-found/not-found.component";
-import { LoginPageComponent } from "./staff/pages/login-page/login-page.component";
+import { LoginComponent } from "./auth/pages/login/login.component";
 import { AuthGuard } from "./core/guards/auth/auth.guard";
 
 const routes: Routes = [
-	{ path: "login", component: LoginPageComponent },
+	{ path: "login", component: LoginComponent },
 	{ path: "", component: DashboardComponent, canActivate: [AuthGuard] },
 	{ path: "profile", component: NotFoundComponent, canActivate: [AuthGuard] },
 	{ path: "users", component: AllUsersComponent, canActivate: [AuthGuard], data: { required_role: ["admin"] } },

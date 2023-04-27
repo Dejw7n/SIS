@@ -20,6 +20,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { FooterComponent } from "./core/components/footer/footer.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { StaffModule } from "./staff/staff.module";
+import { AuthModule } from "./auth/auth.module";
 
 registerLocaleData(cs);
 
@@ -32,6 +33,7 @@ registerLocaleData(cs);
 			},
 		}),
 		StaffModule,
+		AuthModule,
 		CommonModule,
 		BrowserModule,
 		AppRoutingModule,

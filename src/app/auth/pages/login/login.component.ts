@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { AuthService } from "src/app/core/services/auth/auth.service";
+import { AuthService } from "src/app/auth/services/auth/auth.service";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -8,11 +8,11 @@ declare function onUserLoginJs(): any;
 declare function beforePageChangeJs(): any;
 
 @Component({
-	selector: "app-login-page",
-	templateUrl: "./login-page.component.html",
-	styleUrls: ["./login-page.component.sass"],
+	selector: "app-login",
+	templateUrl: "./login.component.html",
+	styleUrls: ["./login.component.sass"],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginComponent implements OnInit {
 	@Output() logged = new EventEmitter<boolean>();
 	loginData = {
 		email: "",
