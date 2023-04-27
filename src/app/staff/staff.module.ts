@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FilesComponent } from "./pages/files/files.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { IssuesComponent } from "./pages/issues/issues.component";
 import { AllUsersComponent } from "./pages/users/components/all-users/all-users.component";
@@ -25,7 +24,7 @@ import { EditorModule } from "@tinymce/tinymce-angular";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
-	declarations: [FilesComponent, LoginPageComponent, IssuesComponent, AllUsersComponent, UserFilterPipe, AddUserComponent, EditUserComponent],
+	declarations: [LoginPageComponent, IssuesComponent, AllUsersComponent, UserFilterPipe, AddUserComponent, EditUserComponent],
 	imports: [SharedModule, FilesModule, OverlayModule, DashboardModule, CommonModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
 	exports: [LoginPageComponent, UserFilterPipe, AllUsersComponent],
 })
