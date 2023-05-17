@@ -1,1 +1,30 @@
-<p>issues works!</p>
+<section>
+	<div class="flex mb-8">
+		<div class="grid">
+			<h1 class="my-auto text-2xl font-semibold text-gray-700">Závady</h1>
+		</div>
+		<div class="flex ml-auto">
+			<button (click)="openIssue()" class="px-6 py-2 rounded-sm font-semibold text-sm text-white isolate bg-red-600 hover:bg-red-700">Nahlásit závadu</button>
+		</div>
+	</div>
+	<!--  *ngIf="userCenterId == 3 || userRole == 'admin' || userRole == 'admin'" -->
+	<div class="grid grid-cols-1 sm:grid-cols-3 h-40 sm:h-8 mt-4 rounded-3xl bg-white">
+		<div (click)="updateCenter(0, $event)" class="cursor-pointer grid h-full rounded-3xl isolate bg-red-600" [attr.data-filter-selected]="true">
+			<span class="m-auto font-semibold text-white">VŠECHNY</span>
+		</div>
+		<div (click)="updateCenter(1, $event)" class="cursor-pointer grid h-full isolate">
+			<span class="m-auto font-semibold text-gray-500">RESSLOVA</span>
+		</div>
+		<div (click)="updateCenter(2, $event)" class="cursor-pointer grid h-full isolate">
+			<span class="m-auto font-semibold text-gray-500">STŘÍBRNÍKY</span>
+		</div>
+	</div>
+	<div class="mt-8">
+	<!--
+		<app-loading-data [status]="loading.posts"></app-loading-data>
+		<div *ngIf="loading.posts.response">
+			<nz-empty *ngIf="posts.length === 0; else displaying"></nz-empty>
+		</div>
+		-->
+	</div>
+</section>

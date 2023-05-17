@@ -23,3 +23,4 @@ describe('IssuesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
