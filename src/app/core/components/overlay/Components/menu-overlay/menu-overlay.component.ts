@@ -25,6 +25,12 @@ export class MenuOverlayComponent implements OnInit {
 			iconType: "team",
 			requiredRole: ["admin"],
 		},
+		{
+			label: "Závady",
+			href: "/issues",
+			iconType: "warning",
+			requiredRole: ["admin"],
+		},
 		// {
 		// 	label: "Závady",
 		// 	href: "/issues",
