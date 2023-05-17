@@ -53,6 +53,9 @@
 				<nz-option *ngFor="let priority of priorities" [nzValue]="priority.id" [nzLabel]="priority.name"></nz-option>
 			</nz-select>
 		</nz-form-item>
+		<nz-form-item class="p-1">
+			<label nz-checkbox [(ngModel)]="Form.monitors">Monitory</label>
+		</nz-form-item>
 	</div>
 </mat-dialog-content>
 <div class="dialog-actions flex">

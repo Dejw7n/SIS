@@ -29,9 +29,10 @@ export class AddPostComponent implements OnInit {
 		priority_id: 1,
 		center_id: 1,
 		session_files: null,
+		monitors: false,
 	};
 
-	constructor(private authService: AuthService, private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private http: HttpClient, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
+	constructor(private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private http: HttpClient, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
 
 	ngOnInit(): void {
 		this.centerService.getAllCenters().subscribe((res) => {

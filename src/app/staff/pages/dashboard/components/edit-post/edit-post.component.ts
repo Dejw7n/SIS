@@ -22,6 +22,7 @@ export class EditPostComponent implements OnInit {
 		content: null,
 		priority_id: null,
 		center_id: null,
+		monitors: false,
 	};
 
 	constructor(private centerService: CenterService, private priorityService: PriorityService, private postService: PostService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<Self>) {}
@@ -34,6 +35,7 @@ export class EditPostComponent implements OnInit {
 				content: this.postData.content,
 				priority_id: this.postData.priority_id,
 				center_id: this.postData.center_id,
+				monitors: this.postData.monitors,
 			};
 		});
 		this.centerService.getAllCenters().subscribe((res) => {
@@ -45,7 +47,7 @@ export class EditPostComponent implements OnInit {
 	}
 
 	send(): void {
-		if (this.Form.title != null && this.Form.content != null && this.Form.center_id != null && this.Form.priority_id != null) {
+		if (this.Form.title != null && this.Form.content != null && this.Form.center_id != null && this.Form.priority_id != null && this.Form.monitors != null) {
 			this.postService.update(this.postId, this.Form).subscribe(
 				(res) => {
 					this.dialogRef.close();

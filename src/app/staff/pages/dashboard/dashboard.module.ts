@@ -20,9 +20,10 @@ import { NzDatePickerModule } from "ng-zorro-antd/date-picker";
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { PostHistoryComponent } from "./components/post-history/post-history.component";
+import { NzCheckboxModule } from "ng-zorro-antd/checkbox";
 
 @NgModule({
 	declarations: [DashboardComponent, PostFilterPipe, AddPostComponent, EditPostComponent, PostHistoryComponent],
-	imports: [SharedModule, FilesModule, EditorModule, CommonModule, OverlayModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
+	imports: [SharedModule, FilesModule, EditorModule, CommonModule, OverlayModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
 })
 export class DashboardModule {}

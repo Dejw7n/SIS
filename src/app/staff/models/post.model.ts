@@ -9,6 +9,7 @@ export interface PostModel {
 	center_id: number;
 	user_id: number;
 	date: Date;
+	monitors: Boolean;
 	user: UserModel;
 	files: FileModel[];
 	changes: any;
