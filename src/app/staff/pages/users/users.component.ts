@@ -6,6 +6,7 @@ import { UserService } from "../../services/user/user.service";
 import { AddUserComponent } from "./components/add-user/add-user.component";
 import { EditUserComponent } from "./components/edit-user/edit-user.component";
 import { UserModel } from "../../models/user.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
 	selector: "app-users",
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit {
 		},
 	};
 
-	constructor(private userService: UserService, private router: Router, public dialog: MatDialog) {}
+	constructor(private snackBar: MatSnackBar, private userService: UserService, private router: Router, public dialog: MatDialog) {}
 
 	ngOnInit(): void {
 		this.getAllUsers();
@@ -47,7 +48,7 @@ export class UsersComponent implements OnInit {
 		dialogRef.componentInstance.userId = userId;
 	}
 	deleteUser(userId: number) {
-		this.userService.deleteUser(userId);
+		this.userService.deleteUser(userId).subscribe();
 		location.reload();
 	}
 
