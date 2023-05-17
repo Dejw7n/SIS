@@ -67,9 +67,15 @@ export class EditUserComponent implements OnInit {
 
 	send() {
 		if (this.Form.name != null && this.Form.lname != null && this.Form.phone != null && this.Form.email != null && this.Form.role_id != null && this.Form.center_id != null) {
-			this.userService.editUser(this.userId, this.Form);
-			// this.close();
-			// location.reload();
+			this.userService.editUser(this.userId, this.Form).subscribe(
+				(res) => {
+					this.close();
+					location.reload();
+				},
+				(err) => {
+					this.snackBar.open("Vyskytla se chyba při změně dat. Chyba: " + err, "X", { panelClass: ["error"] });
+				}
+			);
 		} else {
 			this.snackBar.open("Nejsou vyplněny všechny povinné údaje.", "X", { panelClass: ["error"] });
 		}

@@ -27,10 +27,10 @@ export class UserService {
 	createUser(userData: any) {
 		return this.http.post(this.apiUrl, userData);
 	}
-	editUser(userId: number, userData: any) {
-		this.http.put(this.apiUrl + "/" + userId, userData).subscribe();
+	editUser(userId: number, userData: any): Observable<any> {
+		return this.http.put(this.apiUrl + "/" + userId, userData);
 	}
-	deleteUser(userId: number) {
-		this.http.delete(this.apiUrl + "/" + userId).subscribe();
+	deleteUser(userId: number): Observable<any> {
+		return this.http.delete(this.apiUrl + "/" + userId);
 	}
 }
