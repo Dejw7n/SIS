@@ -1,6 +1,6 @@
-<div class="flex h-16 px-8 py-2 md:px-16 bg-white">
+<div class="flex h-16 px-4 py-2 md:px-16 bg-white">
 	<div id="menu-button" class="grid md:hidden">
-		<div class="my-auto">
+		<div *ngIf="userRole != 'teacher'" class="my-auto">
 			<i class="fa-solid fa-bars text-4xl"></i>
 			<!-- <img src="/assets/icons/menu.png" alt="" class="w-8 h-8" /> -->
 		</div>

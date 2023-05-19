@@ -7,6 +7,8 @@ import { AuthService } from "src/app/auth/services/auth/auth.service";
 	styleUrls: ["./top-overlay.component.sass"],
 })
 export class TopOverlayComponent implements OnInit {
+	userRole: string = "";
+
 	date: Date = new Date();
 	dateFormatted: string = "";
 	evenOddWeek: string = "";
@@ -15,6 +17,9 @@ export class TopOverlayComponent implements OnInit {
 		lname: "",
 	};
 	constructor(private authService: AuthService) {
+		const userData = this.authService.getUserData();
+		this.userRole = userData.role;
+
 		let days = ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota"];
 		this.dateFormatted = `${days[this.date.getDay()]}, ${this.date.getDate()}. ${this.date.getMonth() + 1}. ${this.date.getFullYear()}`;
 		let evenOddWeekNumber = this.getWeekNumber(this.date) % 2;
