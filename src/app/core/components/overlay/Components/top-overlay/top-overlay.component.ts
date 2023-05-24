@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "src/app/auth/services/auth/auth.service";
+import { ChangePasswordComponent } from "../change-password/change-password.component";
 
 @Component({
 	selector: "app-top-overlay",
@@ -16,7 +18,7 @@ export class TopOverlayComponent implements OnInit {
 		name: "",
 		lname: "",
 	};
-	constructor(private authService: AuthService) {
+	constructor(private authService: AuthService, private dialog: MatDialog) {
 		const userData = this.authService.getUserData();
 		this.userRole = userData.role;
 
@@ -32,6 +34,14 @@ export class TopOverlayComponent implements OnInit {
 
 	logout() {
 		this.authService.logout();
+	}
+
+	openChangePassword() {
+		let dialogRef = this.dialog.open(ChangePasswordComponent, {
+			height: "auto",
+			width: "800px",
+			panelClass: "custom-dialog-container",
+		});
 	}
 
 	getWeekNumber(thisDate: Date) {
