@@ -1,9 +1,8 @@
-<p>add-issue works!</p>
 <div mat-dialog-title>
 	<div class="flex">
 		<div>
 			<div class="mt-2">
-				<span class="text-lg text-neutral-700 font-sans font-semibold">Přidat příspěvek</span>
+				<span class="text-lg text-neutral-700 font-sans font-semibold">Nahlásit závadu</span>
 			</div>
 		</div>
 		<div class="ml-auto">
@@ -26,7 +25,7 @@
 			<nz-form-control>
 				<editor
 					[init]="{
-						height: 500,
+						height: 300,
 						menubar: false,
 						plugins: ['advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount'],
 						toolbar:
@@ -54,9 +53,6 @@
 				<nz-option *ngFor="let priority of priorities" [nzValue]="priority.id" [nzLabel]="priority.name"></nz-option>
 			</nz-select>
 		</nz-form-item>
-		<nz-form-item class="p-1">
-			<label nz-checkbox [(ngModel)]="Form.monitors">Monitory</label>
-		</nz-form-item>
 	</div>
 </mat-dialog-content>
 <div class="dialog-actions flex">
@@ -65,3 +61,5 @@
 		<button nz-button (click)="send()" cdkFocusInitial class="px-5 py-2 cursor-pointer rounded-md text-white shadow-xl bg-green-500 hover:bg-green-700">Vytvořit</button>
 	</div>
 </div>
+
+
