@@ -1,3 +1,68 @@
-<p>
-  projects works!
-</p>
+<section>
+	<div class="flex mb-8">
+		<div class="grid">
+			<h1 class="my-auto text-2xl font-semibold text-gray-700">Příspěvky</h1>
+		</div>
+		<div class="flex ml-auto">
+			<button (click)="openAddProject()" class="px-6 py-2 rounded-sm font-semibold text-sm text-white isolate bg-red-600 hover:bg-red-700">Nový příspěvek</button>
+		</div>
+	</div>
+	<div class="mt-8">
+		<app-loading-data [status]="loading.projects"></app-loading-data>
+		<div *ngIf="loading.projects.response">
+			<nz-empty *ngIf="projects.length === 0; else displaying"></nz-empty>
+		</div>
+	</div>
+</section>
+
+<ng-template #displaying>
+	<div class="flex flex-wrap gap-10">
+		<div class="flex flex-grow h-auto rounded-lg overflow-hidden shadow-lg bg-white" *ngFor="let project of projects">
+			<div class="w-full grid gap-8 p-8">
+				<div class="w-full h-fit grid gap-4">
+					<div class="flex">
+						<div class="flex">
+							<p class="text-lg font-semibold">{{ project.title }}</p>
+						</div>
+						<div class="w-5 ml-auto">
+							<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#777" class="w-6 h-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+							</button>
+							<mat-menu #menu="matMenu">
+								<button mat-menu-item (click)="openEditProject(project.id)">
+									<span>Upravit projekt</span>
+								</button>
+								<button (click)="deleteProject(project.id)" mat-menu-item data-button-danger="true" class="button-mat-danger bg-red-600">
+									<span class="text-white">Smazat projekt</span>
+								</button>
+							</mat-menu>
+						</div>
+					</div>
+					<div class="pr-5 overflow-x-auto">
+						<div class="text-black" [innerHTML]="project.description"></div>
+					</div>
+				</div>
+				<div class="flex h-10 mt-auto">
+					<div class="flex gap-2 w-full">
+						<div class="h-full overflow-hidden rounded-full">
+							<img src="/assets/images/profile.webp" alt="" class="h-full" />
+						</div>
+						<div class="flex flex-col py-1">
+							<p class="text-sm text-zinc-500 font-semibold leading-none">{{ project.author.name }} {{ project.author.lname }}</p>
+							<div class="mt-auto">
+								<p class="text-sm text-stone-400 leading-none">{{ project.created_at }}</p>
+							</div>
+						</div>
+					</div>
+					<div class="flex ml-auto" *ngIf="project.created_at !== project.updated_at">
+						<!-- <div class="mt-auto">
+							<span class="ml-auto text-xs leading-none">Naposledy upraveno {{ post.changes[post.changes.length - 1].user.name }} {{ post.changes[post.changes.length - 1].user.lname }} v {{ getReadeableDate(post.changes[post.changes.length - 1].created_at) }}</span>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>

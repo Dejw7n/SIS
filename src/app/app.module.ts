@@ -8,7 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 import { cs_CZ, NZ_I18N } from "ng-zorro-antd/i18n";
-import { CommonModule, registerLocaleData } from "@angular/common";
+import { CommonModule, DatePipe, registerLocaleData } from "@angular/common";
 import cs from "@angular/common/locales/cs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -48,6 +48,7 @@ registerLocaleData(cs);
 	],
 	exports: [],
 	providers: [
+		DatePipe,
 		{ provide: NZ_I18N, useValue: cs_CZ },
 		AuthGuard,
 		{

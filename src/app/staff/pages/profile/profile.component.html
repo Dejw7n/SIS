@@ -1,24 +1,28 @@
-<div class="grid gap-4">
-	<div class="grid gap-2 w-96">
-		<div>
+<div class="grid gap-6">
+	<div class="">
+		<p class="text-2xl font-semibold">Informace o profilu</p>
+		<p class="text-sm">Pro změnu údajů kontaktujte vedení školy.</p>
+	</div>
+	<div class="grid gap-4 w-96">
+		<div class="input-wrap">
 			<p class="input-title">Jméno:</p>
 			<div class="input">{{ userData.name }}</div>
 		</div>
-		<div>
+		<div class="input-wrap">
 			<p class="input-title">Přijmení:</p>
 			<div class="input">{{ userData.lname }}</div>
 		</div>
-		<div>
+		<div class="input-wrap">
 			<p class="input-title">Role:</p>
 			<div class="input">{{ userData.role }}</div>
 		</div>
-		<div>
+		<div class="input-wrap">
 			<p class="input-title">Tell:</p>
 			<div class="input">{{ userData.phone }}</div>
 		</div>
-		<div>
+		<div class="input-wrap">
 			<p class="input-title">Vytvořen:</p>
-			<div class="input">{{ userData.created_at }}</div>
+			<div class="input">{{ formattedDate }}</div>
 		</div>
 	</div>
 	<div class="flex gap-8">

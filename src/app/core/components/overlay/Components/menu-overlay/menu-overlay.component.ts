@@ -26,12 +26,6 @@ export class MenuOverlayComponent implements OnInit {
 			requiredRole: ["admin"],
 		},
 		{
-			label: "Správa profilu",
-			href: "/profile",
-			iconType: "user",
-			requiredRole: ["teacher", "admin"],
-		},
-		{
 			label: "Závady",
 			href: "/issues",
 			iconType: "warning",
@@ -50,10 +44,10 @@ export class MenuOverlayComponent implements OnInit {
 			requiredRole: ["teacher", "admin"],
 		},
 		{
-			label: "Knihovna",
-			href: "/library",
-			iconType: "warning",
-			requiredRole: ["admin"],
+			label: "Správa profilu",
+			href: "/profile",
+			iconType: "user",
+			requiredRole: ["teacher", "admin"],
 		},
 	];
 	menuLogout: any = {

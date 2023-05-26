@@ -9,12 +9,14 @@ import { LoginComponent } from "./auth/pages/login/login.component";
 import { AuthGuard } from "./core/guards/auth/auth.guard";
 import { IssuesComponent } from "./staff/pages/issues/issues.component";
 import { ProfileComponent } from "./staff/pages/profile/profile.component";
+import { ProjectsComponent } from "./staff/pages/projects/projects.component";
 
 const routes: Routes = [
 	{ path: "login", component: LoginComponent },
 	{ path: "", component: DashboardComponent, canActivate: [AuthGuard] },
 	{ path: "users", component: UsersComponent, canActivate: [AuthGuard], data: { required_role: ["admin"] } },
 	{ path: "issues", component: IssuesComponent, canActivate: [AuthGuard] },
+	{ path: "projects", component: ProjectsComponent, canActivate: [AuthGuard] },
 	{ path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
 	{ path: "**", component: NotFoundComponent, canActivate: [AuthGuard] },
 ];
