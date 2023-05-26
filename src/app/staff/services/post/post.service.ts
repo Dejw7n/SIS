@@ -26,15 +26,8 @@ export class PostService {
 	update(postId: number, postData: any): Observable<any> {
 		return this.http.put(this.postApiUrl + "/" + postId, postData);
 	}
-	deletePost(postId: number) {
-		return this.http.delete(this.postApiUrl + "/" + postId).subscribe(
-			(res) => {
-				return true;
-			},
-			(error) => {
-				return false;
-			}
-		);
+	deletePost(postId: number): Observable<any> {
+		return this.http.delete(this.postApiUrl + "/" + postId);
 	}
 	getPostChanges(postId: number): Observable<any> {
 		return this.http.get(this.postApiUrl + "/" + postId + "/changes", {});

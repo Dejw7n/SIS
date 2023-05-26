@@ -1,4 +1,4 @@
 export const environment = {
 	production: false,
-	API_URL: "https://sis-api.spsul.cz/api",
+	API_URL: "http://localhost:30000/api",
 };

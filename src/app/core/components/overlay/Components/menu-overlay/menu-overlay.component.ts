@@ -26,23 +26,23 @@ export class MenuOverlayComponent implements OnInit {
 			requiredRole: ["admin"],
 		},
 		{
+			label: "Správa profilu",
+			href: "/profile",
+			iconType: "user",
+			requiredRole: ["teacher", "admin"],
+		},
+		{
 			label: "Závady",
 			href: "/issues",
 			iconType: "warning",
 			requiredRole: ["admin"],
 		},
-		// {
-		// 	label: "Závady",
-		// 	href: "/issues",
-		// 	iconType: "tool",
-		// 	requiredRole: 0,
-		// },
-		// {
-		// 	label: "Soubory",
-		// 	href: "/files",
-		// 	iconType: "file",
-		// 	requiredRole: 0,
-		// },
+		{
+			label: "Knihovna",
+			href: "/library",
+			iconType: "user",
+			requiredRole: ["teacher"],
+		},
 	];
 	menuLogout: any = {
 		label: "Odhlásit se",

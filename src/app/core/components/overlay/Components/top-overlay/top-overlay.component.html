@@ -1,6 +1,6 @@
-<div class="flex h-16 px-8 py-2 md:px-16 bg-white">
+<div class="flex h-16 px-4 py-2 md:px-16 bg-white">
 	<div id="menu-button" class="grid md:hidden">
-		<div class="my-auto">
+		<div *ngIf="userRole != 'teacher'" class="my-auto">
 			<i class="fa-solid fa-bars text-4xl"></i>
 			<!-- <img src="/assets/icons/menu.png" alt="" class="w-8 h-8" /> -->
 		</div>
@@ -15,17 +15,28 @@
 			</div>
 		</div>
 	</div>
-	<div class="ml-auto cursor-pointer" (click)="logout()">
-		<div class="flex">
-			<div class="grid mr-2">
+	<div class="ml-auto cursor-pointer" mat-icon-button [matMenuTriggerFor]="menu">
+		<div class="flex gap-3">
+			<div class="w-12 h-full ml-auto overflow-hidden rounded-full">
+				<img src="/assets/images/profile.webp" alt="Profile img" class="w-full h-full" />
+			</div>
+			<div class="grid">
 				<div class="my-auto">
 					<p class="text-right leading-none">{{ userData.name }}</p>
 					<p class="font-semibold text-right leading-none">{{ userData.lname }}</p>
 				</div>
 			</div>
-			<div class="w-12 h-full ml-auto overflow-hidden rounded-full">
-				<img src="/assets/images/profile.webp" alt="Profile img" class="w-full h-full" />
+			<div class="flex">
+				<i class="fa-solid text-gray-700 fa-chevron-down my-auto text-xl"></i>
 			</div>
 		</div>
 	</div>
+	<mat-menu #menu="matMenu">
+		<button (click)="openChangePassword()" mat-menu-item>
+			<span>Změnit heslo</span>
+		</button>
+		<button (click)="logout()" mat-menu-item data-button-danger="true" class="button-mat-danger bg-red-600">
+			<span class="text-white">Odhlásit se</span>
+		</button>
+	</mat-menu>
 </div>

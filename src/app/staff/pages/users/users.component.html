@@ -32,7 +32,7 @@
 
 	<div class="mt-6">
 		<app-loading-data [status]="loading.users"></app-loading-data>
-		<div *ngIf="loading.users.response">
+		<div *ngIf="loading.users.response" class="overflow-x-scroll">
 			<nz-empty *ngIf="(Users | userFilter : searchText : center).length == 0; else displaying"></nz-empty>
 		</div>
 	</div>
