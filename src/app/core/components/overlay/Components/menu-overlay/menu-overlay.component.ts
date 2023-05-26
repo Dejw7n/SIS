@@ -40,8 +40,14 @@ export class MenuOverlayComponent implements OnInit {
 		{
 			label: "Projekty",
 			href: "/projects",
-			iconType: "warning",
+			iconType: "mobile",
 			requiredRole: ["admin"],
+		},
+		{
+			label: "Nápady",
+			href: "/ideas",
+			iconType: "bulb",
+			requiredRole: ["teacher", "admin"],
 		},
 		{
 			label: "Knihovna",

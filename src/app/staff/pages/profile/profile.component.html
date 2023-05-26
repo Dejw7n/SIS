@@ -1,0 +1,28 @@
+<div class="grid gap-4">
+	<div class="grid gap-2 w-96">
+		<div>
+			<p class="input-title">Jméno:</p>
+			<div class="input">{{ userData.name }}</div>
+		</div>
+		<div>
+			<p class="input-title">Přijmení:</p>
+			<div class="input">{{ userData.lname }}</div>
+		</div>
+		<div>
+			<p class="input-title">Role:</p>
+			<div class="input">{{ userData.role }}</div>
+		</div>
+		<div>
+			<p class="input-title">Tell:</p>
+			<div class="input">{{ userData.phone }}</div>
+		</div>
+		<div>
+			<p class="input-title">Vytvořen:</p>
+			<div class="input">{{ userData.created_at }}</div>
+		</div>
+	</div>
+	<div class="flex gap-8">
+		<div class="bg-red-600 hover:bg-red-700 px-8 py-2 rounded-sm text-white cursor-pointer" (click)="openChangePassword()">Změnit heslo</div>
+		<div class="bg-red-600 hover:bg-red-700 px-8 py-2 rounded-sm text-white cursor-pointer" (click)="logout()">Odhlásit se</div>
+	</div>
+</div>
