@@ -38,10 +38,16 @@ export class MenuOverlayComponent implements OnInit {
 			requiredRole: ["admin"],
 		},
 		{
+			label: "Projekty",
+			href: "/projects",
+			iconType: "warning",
+			requiredRole: ["admin"],
+		},
+		{
 			label: "Knihovna",
 			href: "/library",
-			iconType: "user",
-			requiredRole: ["teacher"],
+			iconType: "warning",
+			requiredRole: ["admin"],
 		},
 	];
 	menuLogout: any = {
