@@ -26,13 +26,81 @@
 			<nz-empty *ngIf="posts.length === 0; else displaying"></nz-empty>
 		</div>
 		-->
+
+		<div class="flex flex-wrap gap-10 m-8">
+			<div class="flex flex-grow h-auto rounded-lg overflow-hidden shadow-lg bg-white">
+				<div class="testt max-w-[8px] w-full isolate"></div>
+				<div class="w-full grid gap-8 p-8">
+					<div class="w-full h-fit grid gap-4">
+						<div class="flex">
+							<div class="flex">
+								<p class="text-lg font-semibold">Ve škole jsou fakt starý okna já jen tak</p>
+							</div>
+							<div class="ml-4">
+								<div class="flex gap-2 text-white font-semibold">
+									<span class="px-3 py-1 rounded-full isolate bg-orange-600">RES</span>
+									<span class="px-3 py-1 rounded-full isolate bg-blue-600">STŘ</span>
+								</div>
+							</div>
+							<div class="w-5 ml-auto">
+								<button aria-label="Example icon-button with a menu">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#777" class="w-6 h-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+								</button>
+							</div>
+						</div>
+						<div class="pr-5 overflow-x-auto">
+							<div class="text-black"></div>
+						</div>
+						<div class="flex border-t-2 py-4">
+							<div class="flex gap-2 flex-wrap-reverse rounded-lg">
+								<div class="flex px-4 py-3 rounded-lg cursor-pointer bg-blue-50 hover:bg-blue-100">
+									<div class="flex h-10">
+										<div class="">
+											<img src="/assets/icons/mime/.png" alt="" class="h-full" />
+										</div>
+										<div class="grid ml-1 py-1">
+											<p class="font-semibold leading-none"></p>
+											<p class="mt-auto text-neutral-500 leading-none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aliquid amet dolor expedita necessitatibus placeat corrupti labore laboriosam. Harum qui, pariatur exercitationem corporis voluptatum esse repudiandae excepturi unde explicabo autem.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex h-10 mt-auto">
+						<div class="flex gap-2 w-full">
+							<div class="h-full overflow-hidden rounded-full">
+								<img src="/assets/images/profile.webp" alt="" class="h-full" />
+							</div>
+							<div class="flex flex-col py-1">
+								<p class="text-sm text-zinc-500 font-semibold leading-none">Weby na Míru</p>
+								<div class="mt-auto">
+									<p class="text-sm text-stone-400 leading-none">studentisvetu.cz</p>
+								</div>
+							</div>
+						</div>
+						<div class="flex ml-auto">
+							<div class="mt-auto">
+								<span class="ml-auto text-xs leading-none"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		
+
 	</div>
 </section>
 
 
 <ng-template #displaying>
 	
-
+	
 
 
 </ng-template>
