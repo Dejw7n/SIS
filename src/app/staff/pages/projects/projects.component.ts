@@ -61,7 +61,7 @@ export class ProjectsComponent implements OnInit {
 	}
 
 	deleteProject(id: number) {
-		this.projectService.deleteProject(id).subscribe(
+		this.projectService.delete(id).subscribe(
 			(Response) => {
 				location.reload();
 			},

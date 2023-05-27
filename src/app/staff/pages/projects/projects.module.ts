@@ -10,9 +10,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { EditorModule } from "@tinymce/tinymce-angular";
 import { FormsModule } from "@angular/forms";
+import { NzInputModule } from "ng-zorro-antd/input";
 
 @NgModule({
 	declarations: [ProjectsComponent, AddProjectComponent, EditProjectComponent],
-	imports: [CommonModule, SharedModule, NzEmptyModule, MatMenuModule, MatDialogModule, NzFormModule, EditorModule, FormsModule],
+	imports: [CommonModule, SharedModule, NzEmptyModule, MatMenuModule, MatDialogModule, NzFormModule, EditorModule, FormsModule, NzInputModule],
 })
 export class ProjectsModule {}

@@ -2,7 +2,7 @@
 	<div class="flex">
 		<div>
 			<div class="mt-2">
-				<span class="text-lg text-neutral-700 font-sans font-semibold">Přidat příspěvek</span>
+				<span class="text-lg text-neutral-700 font-sans font-semibold">Přidat projekt</span>
 			</div>
 		</div>
 		<div class="ml-auto">
@@ -18,7 +18,12 @@
 	<div nz-form>
 		<nz-form-item>
 			<nz-form-control>
-				<input nz-input placeholder="Nadpis" [(ngModel)]="Form.title" name="title" type="text" id="title" />
+				<input nz-input placeholder="Nadpis *" [(ngModel)]="Form.title" name="title" type="text" id="title" />
+			</nz-form-control>
+		</nz-form-item>
+		<nz-form-item>
+			<nz-form-control>
+				<input nz-input placeholder="Krátký popisek *" [(ngModel)]="Form.short_description" name="short_description" type="text" id="short_description" />
 			</nz-form-control>
 		</nz-form-item>
 		<nz-form-item>
@@ -34,7 +39,7 @@
        alignleft aligncenter alignright alignjustify | \
        bullist numlist outdent indent | removeformat | help'
 					}"
-					[(ngModel)]="Form.content"
+					[(ngModel)]="Form.description"
 				></editor>
 				<!-- <textarea [(ngModel)]="Form.content" id="tinymce" cols="30" rows="10" class="w-full"></textarea> -->
 			</nz-form-control>
