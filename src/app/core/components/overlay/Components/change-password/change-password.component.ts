@@ -22,7 +22,7 @@ export class ChangePasswordComponent {
 
 	//form for api
 	formApi = {
-		password: null,
+		password: "",
 	};
 
 	async send() {
@@ -31,8 +31,8 @@ export class ChangePasswordComponent {
 				this.formApi.password = this.form.new_password;
 				this.userService.editUser(this.userData.id, this.formApi).subscribe(
 					(res) => {
-						this.close();
-						location.reload();
+						//this.close();
+						//location.reload();
 					},
 					(err) => {
 						console.log(err);
