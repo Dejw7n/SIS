@@ -38,10 +38,10 @@ export class UserService {
 	editUser(userId: number, userData: any): Observable<any> {
 		if (userData.password) {
 			// Generate a salt (a random string used in the hashing process)
-			const saltRounds = 10;
-			const salt = bcrypt.genSaltSync(saltRounds);
-			const hashedPassword = bcrypt.hashSync(userData.password, salt);
-			userData.password = hashedPassword;
+			//const saltRounds = 10;
+			//const salt = bcrypt.genSaltSync(saltRounds);
+			//const hashedPassword = bcrypt.hashSync(userData.password, salt);
+			//userData.password = hashedPassword;
 		}
 		return this.http.put(this.apiUrl + "/" + userId, userData);
 	}
