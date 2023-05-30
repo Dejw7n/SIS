@@ -1,19 +1,20 @@
-import { IssueStatusModel } from "./../../../../models/IssueStatus.model";
 import { Component, OnInit, Self } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { IssueService } from "../services/issue.service";
-import { CenterModel } from "src/app/staff/models/center.model";
-import { CenterService } from "src/app/staff/services/center/center.service";
-import { IssuePriorityModel } from "src/app/staff/models/issuePriority.model";
 import { AuthService } from "src/app/auth/services/auth/auth.service";
+import { CenterService } from "src/app/staff/services/center/center.service";
+import { IssueStatusModel } from "src/app/staff/models/IssueStatus.model";
+import { IssuePriorityModel } from "src/app/staff/models/issuePriority.model";
+import { CenterModel } from "src/app/staff/models/center.model";
 
 @Component({
-	selector: "app-add-issue",
-	templateUrl: "./add-issue.component.html",
-	styleUrls: ["./add-issue.component.sass"],
+	selector: "app-edit-post",
+	templateUrl: "./edit-issue.component.html",
+	styleUrls: ["./edit-issue.component.sass"],
 })
-export class AddIssueComponent implements OnInit {
+export class EditIssueComponent implements OnInit {
+	issueId!: number;
 	centers: CenterModel[] = [];
 	issuePriorities: IssuePriorityModel[] = [];
 	issueStatuses: IssueStatusModel[] = [];
@@ -43,11 +44,20 @@ export class AddIssueComponent implements OnInit {
 		this.issueService.getAllStatutes().subscribe((res) => {
 			this.issueStatuses = res;
 		});
+
+		this.issueService.getOneIssue(this.issueId).subscribe((res) => {
+			this.Form = {
+				title: res.title,
+				description: res.description,
+				priority_id: res.priority_id,
+				center_id: res.center_id,
+			};
+		});
 	}
 
 	send(): void {
 		if (this.Form.title != null && this.Form.description != null && this.Form.priority_id != null && this.Form.center_id != null) {
-			this.issueService.create(this.Form).subscribe(
+			this.issueService.update(this.issueId, this.Form).subscribe(
 				(res) => {
 					this.dialogRef.close();
 					location.reload();
@@ -59,5 +69,15 @@ export class AddIssueComponent implements OnInit {
 		} else {
 			this.snackBar.open("Nejsou vyplněny všechny povinné údaje.", "X", { panelClass: ["error"] });
 		}
+	}
+
+	visible = false;
+
+	open(): void {
+		this.visible = true;
+	}
+
+	close(): void {
+		this.visible = false;
 	}
 }

@@ -19,7 +19,7 @@ export class ProjectService {
 		return this.http.get(this.apiUrl + "/" + projectId, {});
 	}
 	create(projectData: any): Observable<any> {
-		projectData.author_id = this.authService.getUserData().id;
+		projectData.author_id = this.authService.getSessionData().id;
 		return this.http.post(this.apiUrl, projectData);
 	}
 	update(projectId: number, projectData: any): Observable<any> {

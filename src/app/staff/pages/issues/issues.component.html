@@ -4,103 +4,100 @@
 			<h1 class="my-auto text-2xl font-semibold text-gray-700">Závady</h1>
 		</div>
 		<div class="flex ml-auto">
-			<button (click)="openIssue()" class="px-6 py-2 rounded-sm font-semibold text-sm text-white isolate bg-red-600 hover:bg-red-700">Nahlásit závadu</button>
+			<button (click)="openAddIssue()" class="px-6 py-2 rounded-sm font-semibold text-sm text-white isolate bg-red-600 hover:bg-red-700">Nová závada</button>
 		</div>
 	</div>
-	<!--  *ngIf="userCenterId == 3 || userRole == 'admin' || userRole == 'admin'" -->
-	<div class="grid grid-cols-1 sm:grid-cols-3 h-40 sm:h-8 mt-4 rounded-3xl bg-white">
-		<div (click)="updateCenter(0, $event)" class="cursor-pointer grid h-full rounded-3xl isolate bg-red-600" [attr.data-filter-selected]="true">
+	<div *ngIf="userCenterId == 3 || userRole == 'admin' || userRole == 'management'" class="h-auto grid grid-cols-1 sm:grid-cols-3 sm:h-8 mt-4 rounded-xl bg-white">
+		<div (click)="updateCenter(0, $event)" class="cursor-pointer grid py-3 h-fit sm:py-0 sm:h-8 rounded-xl isolate bg-red-600" [attr.data-filter-selected]="true">
 			<span class="m-auto font-semibold text-white">VŠECHNY</span>
 		</div>
-		<div (click)="updateCenter(1, $event)" class="cursor-pointer grid h-full isolate">
+		<div (click)="updateCenter(1, $event)" class="cursor-pointer grid py-3 h-fit sm:py-0 sm:h-8 isolate">
 			<span class="m-auto font-semibold text-gray-500">RESSLOVA</span>
 		</div>
-		<div (click)="updateCenter(2, $event)" class="cursor-pointer grid h-full isolate">
+		<div (click)="updateCenter(2, $event)" class="cursor-pointer grid py-3 h-fit sm:py-0 sm:h-8 isolate">
 			<span class="m-auto font-semibold text-gray-500">STŘÍBRNÍKY</span>
 		</div>
 	</div>
-	<div class="mt-8">
-	<!--
-		<app-loading-data [status]="loading.posts"></app-loading-data>
-		<div *ngIf="loading.posts.response">
-			<nz-empty *ngIf="posts.length === 0; else displaying"></nz-empty>
+	<div class="h-auto grid grid-cols-1 sm:grid-cols-3 sm:h-8 mt-4 rounded-xl bg-white">
+		<div (click)="updateStatus(1, $event)" class="cursor-pointer grid py-3 h-fit sm:py-0 sm:h-8 rounded-xl isolate bg-red-600" [attr.data-filter-selected-status]="true">
+			<span class="m-auto font-semibold text-white">ČEKÁ NA VYŘÍZENÍ</span>
 		</div>
-		-->
+		<div (click)="updateStatus(2, $event)" class="cursor-pointer grid py-3 h-fit sm:py-0 sm:h-8 isolate">
+			<span class="m-auto font-semibold text-gray-500">VYŘIZUJE SE</span>
+		</div>
+		<div (click)="updateStatus(3, $event)" class="cursor-pointer grid py-3 h-fit sm:py-0 sm:h-8 isolate">
+			<span class="m-auto font-semibold text-gray-500">VYŘEŠENO</span>
+		</div>
+	</div>
+	<div class="mt-8">
+		<app-loading-data [status]="loading.issues"></app-loading-data>
+		<div *ngIf="loading.issues.response">
+			<nz-empty *ngIf="issues.length === 0; else displaying"></nz-empty>
+		</div>
+	</div>
+</section>
 
-		<div class="flex flex-wrap gap-10 m-8">
-			<div class="flex flex-grow h-auto rounded-lg overflow-hidden shadow-lg bg-white">
-				<div class="testt max-w-[8px] w-full isolate"></div>
-				<div class="w-full grid gap-8 p-8">
-					<div class="w-full h-fit grid gap-4">
+<ng-template #displaying>
+	<div class="flex flex-wrap gap-10">
+		<div class="flex flex-grow h-auto rounded-lg overflow-hidden shadow-lg bg-white" *ngFor="let issue of issues | issueFilter : center : status">
+			<div class="w-full grid gap-8 p-8">
+				<div class="w-full h-fit grid gap-4">
+					<div class="flex">
 						<div class="flex">
-							<div class="flex">
-								<p class="text-lg font-semibold">Ve škole jsou fakt starý okna já jen tak</p>
+							<p class="text-lg font-semibold">{{ issue.title }}</p>
+						</div>
+						<div class="ml-4">
+							<div class="flex gap-2 text-white font-semibold">
+								<span *ngIf="issue.priority_id == 2" class="px-3 py-1 rounded-full isolate bg-red-600">CO NEJDŘÍVE</span>
+								<span *ngIf="issue.center_id == 1 || issue.center_id == 3" class="px-3 py-1 rounded-full isolate bg-orange-600">RESSLOVA</span>
+								<span *ngIf="issue.center_id == 2 || issue.center_id == 3" class="px-3 py-1 rounded-full isolate bg-blue-600">STŘÍBRNÍKY</span>
+								<span *ngIf="issue.status_id == 1" class="status-tag bg-gray-500">ČEKÁ NA VYŘÍZENÍ</span>
+								<span *ngIf="issue.status_id == 2" class="status-tag bg-yellow-600">VYŘIZUJE SE</span>
+								<span *ngIf="issue.status_id == 3" class="status-tag bg-green-500">VYŘÍZENO</span>
 							</div>
-							<div class="ml-4">
-								<div class="flex gap-2 text-white font-semibold">
-									<span class="px-3 py-1 rounded-full isolate bg-orange-600">RES</span>
-									<span class="px-3 py-1 rounded-full isolate bg-blue-600">STŘ</span>
-								</div>
-							</div>
-							<div class="w-5 ml-auto">
-								<button aria-label="Example icon-button with a menu">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#777" class="w-6 h-6">
-										<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-									</svg>
+						</div>
+						<div *ngIf="userRole == 'admin' || userRole == 'management'" class="w-5 ml-auto">
+							<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#777" class="w-6 h-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+							</button>
+							<mat-menu #menu="matMenu">
+								<button mat-menu-item (click)="openChangeStatus(issue.id)">
+									<span>Změnit stav</span>
 								</button>
-							</div>
+								<button mat-menu-item (click)="openEditIssue(issue.id)">
+									<span>Upravit závadu</span>
+								</button>
+								<button (click)="deleteIssue(issue.id)" mat-menu-item data-button-danger="true" class="button-mat-danger bg-red-600">
+									<span class="text-white">Smazat závadu</span>
+								</button>
+							</mat-menu>
 						</div>
-						<div class="pr-5 overflow-x-auto">
-							<div class="text-black"></div>
+					</div>
+					<div class="pr-5 overflow-x-auto">
+						<div class="text-black" [innerHTML]="issue.description"></div>
+					</div>
+				</div>
+				<div class="flex h-10 mt-auto">
+					<div class="flex gap-2 w-full">
+						<div class="h-full overflow-hidden rounded-full">
+							<img src="/assets/images/profile.webp" alt="" class="h-full" />
 						</div>
-						<div class="flex border-t-2 py-4">
-							<div class="flex gap-2 flex-wrap-reverse rounded-lg">
-								<div class="flex px-4 py-3 rounded-lg cursor-pointer bg-blue-50 hover:bg-blue-100">
-									<div class="flex h-10">
-										<div class="">
-											<img src="/assets/icons/mime/.png" alt="" class="h-full" />
-										</div>
-										<div class="grid ml-1 py-1">
-											<p class="font-semibold leading-none"></p>
-											<p class="mt-auto text-neutral-500 leading-none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi aliquid amet dolor expedita necessitatibus placeat corrupti labore laboriosam. Harum qui, pariatur exercitationem corporis voluptatum esse repudiandae excepturi unde explicabo autem.</p>
-										</div>
-									</div>
-								</div>
+						<div class="flex flex-col py-1">
+							<p class="text-sm text-zinc-500 font-semibold leading-none">{{ issue.author.name }} {{ issue.author.lname }}</p>
+							<div class="mt-auto">
+								<p class="text-sm text-stone-400 leading-none">{{ issue.created_at }}</p>
 							</div>
 						</div>
 					</div>
-					<div class="flex h-10 mt-auto">
-						<div class="flex gap-2 w-full">
-							<div class="h-full overflow-hidden rounded-full">
-								<img src="/assets/images/profile.webp" alt="" class="h-full" />
-							</div>
-							<div class="flex flex-col py-1">
-								<p class="text-sm text-zinc-500 font-semibold leading-none">Weby na Míru</p>
-								<div class="mt-auto">
-									<p class="text-sm text-stone-400 leading-none">studentisvetu.cz</p>
-								</div>
-							</div>
-						</div>
-						<div class="flex ml-auto">
-							<div class="mt-auto">
-								<span class="ml-auto text-xs leading-none"></span>
-							</div>
-						</div>
+					<div class="flex ml-auto" *ngIf="issue.created_at !== issue.updated_at">
+						<!-- <div class="mt-auto">
+							<span class="ml-auto text-xs leading-none">Naposledy upraveno {{ post.changes[post.changes.length - 1].user.name }} {{ post.changes[post.changes.length - 1].user.lname }} v {{ getReadeableDate(post.changes[post.changes.length - 1].created_at) }}</span>
+						</div> -->
 					</div>
 				</div>
 			</div>
 		</div>
-
-		
-		
-
 	</div>
-</section>
-
-
-<ng-template #displaying>
-	
-	
-
-
 </ng-template>

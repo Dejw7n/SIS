@@ -19,7 +19,7 @@ export class TopOverlayComponent implements OnInit {
 		lname: "",
 	};
 	constructor(private authService: AuthService, private dialog: MatDialog) {
-		const userData = this.authService.getUserData();
+		const userData = this.authService.getSessionData();
 		this.userRole = userData.role;
 
 		let days = ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota"];
@@ -57,8 +57,8 @@ export class TopOverlayComponent implements OnInit {
 	}
 
 	changeName() {
-		this.userData.name = this.authService.getUserData().name;
-		this.userData.lname = this.authService.getUserData().lname;
+		this.userData.name = this.authService.getSessionData().name;
+		this.userData.lname = this.authService.getSessionData().lname;
 		window.removeEventListener("storage", this.changeName, false);
 	}
 }

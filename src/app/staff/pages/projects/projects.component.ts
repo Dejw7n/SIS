@@ -32,7 +32,7 @@ export class ProjectsComponent implements OnInit {
 	userRole: string = "";
 
 	constructor(private snackBar: MatSnackBar, private authService: AuthService, private projectService: ProjectService, public dialog: MatDialog, private router: Router) {
-		const userData = this.authService.getUserData();
+		const userData = this.authService.getSessionData();
 		this.userCenterId = userData.center_id;
 		this.userRole = userData.role;
 	}
@@ -66,7 +66,7 @@ export class ProjectsComponent implements OnInit {
 				location.reload();
 			},
 			(error) => {
-				this.snackBar.open("Nepodařilo se smazat příspěvek", "Zavřít", {});
+				this.snackBar.open("Nepodařilo se smazat projekt", "Zavřít", {});
 			}
 		);
 	}

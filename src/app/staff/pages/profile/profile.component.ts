@@ -13,7 +13,7 @@ export class ProfileComponent {
 	formattedDate: any;
 	userData: any;
 	constructor(private datePipe: DatePipe, private authService: AuthService, private dialog: MatDialog) {
-		this.userData = this.authService.getUserData();
+		this.userData = this.authService.getSessionData();
 
 		this.formattedDate = this.datePipe.transform(this.userData.created_at, "yyyy-MM-dd HH:mm:ss");
 	}

@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
 	userRole: string = "";
 
 	constructor(private snackBar: MatSnackBar, private authService: AuthService, private postService: PostService, private fileService: FileService, public dialog: MatDialog, private router: Router) {
-		const userData = this.authService.getUserData();
+		const userData = this.authService.getSessionData();
 		this.userCenterId = userData.center_id;
 		this.userRole = userData.role;
 	}

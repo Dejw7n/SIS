@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 	}
 
 	checkUser(route: ActivatedRouteSnapshot) {
-		let Userrole = this.authService.getUserData().role;
+		let Userrole = this.authService.getSessionData().role;
 		if (route.data["required_role"]) {
 			if (route.data["required_role"].includes(Userrole)) {
 				return true;

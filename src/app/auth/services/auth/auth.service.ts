@@ -31,7 +31,7 @@ export class AuthService {
 		}
 	}
 
-	getUserData() {
+	getSessionData() {
 		const token = localStorage.getItem("access_token");
 		if (token !== null) {
 			const decodedToken = this.jwtHelper.decodeToken(token);

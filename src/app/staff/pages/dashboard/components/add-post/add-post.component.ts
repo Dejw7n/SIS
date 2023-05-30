@@ -71,14 +71,4 @@ export class AddPostComponent implements OnInit {
 			this.snackBar.open("Nejsou vyplněny všechny povinné údaje.", "X", { panelClass: ["error"] });
 		}
 	}
-
-	visible = false;
-
-	open(): void {
-		this.visible = true;
-	}
-
-	close(): void {
-		this.visible = false;
-	}
 }

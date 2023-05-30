@@ -12,7 +12,7 @@ import { UserService } from "src/app/staff/services/user/user.service";
 export class ChangePasswordComponent {
 	userData: any;
 	constructor(private authService: AuthService, private userService: UserService, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<Self>) {
-		this.userData = this.authService.getUserData();
+		this.userData = this.authService.getSessionData();
 	}
 
 	form = {

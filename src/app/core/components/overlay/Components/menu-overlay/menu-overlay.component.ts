@@ -62,6 +62,6 @@ export class MenuOverlayComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.userRole = this.authService.getUserData().role;
+		this.userRole = this.authService.getSessionData().role;
 	}
 }

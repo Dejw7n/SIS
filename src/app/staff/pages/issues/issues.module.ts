@@ -17,9 +17,14 @@ import { NzIconModule } from "ng-zorro-antd/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { NzCheckboxModule } from "ng-zorro-antd/checkbox";
 import { FilesModule } from "src/app/core/components/files/files.module";
+import { EditIssueComponent } from "./components/edit-issue/edit-issue.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { IssueFilterPipe } from "./pipes/issue-filter.pipe";
+import { ChangeStatusComponent } from "./components/change-status/change-status.component";
+import { CenterFilterPipe } from "./pipes/center-filter.pipe";
 
 @NgModule({
-	declarations: [IssuesComponent, AddIssueComponent],
-	imports: [FilesModule, CommonModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
+	declarations: [IssuesComponent, IssueFilterPipe, AddIssueComponent, EditIssueComponent, ChangeStatusComponent, CenterFilterPipe],
+	imports: [FilesModule, SharedModule, CommonModule, NzEmptyModule, NzDrawerModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzSelectModule, MatMenuModule, NzDatePickerModule, MatDialogModule, NzIconModule, EditorModule, MatSnackBarModule],
 })
 export class IssuesModule {}
