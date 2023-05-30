@@ -38,12 +38,6 @@ export class MenuOverlayComponent implements OnInit {
 			requiredRole: ["admin"],
 		},
 		{
-			label: "Nápady",
-			href: "/ideas",
-			iconType: "bulb",
-			requiredRole: ["teacher", "admin"],
-		},
-		{
 			label: "Správa profilu",
 			href: "/profile",
 			iconType: "user",
