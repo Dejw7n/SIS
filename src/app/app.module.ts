@@ -42,7 +42,6 @@ registerLocaleData(cs);
 		BrowserAnimationsModule,
 		ErrorsModule,
 		OverlayModule,
-		ErrorsModule,
 		NzEmptyModule,
 		MatIconModule,
 	],

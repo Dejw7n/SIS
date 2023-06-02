@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
 
 	redirectUser() {
 		this.router.navigate(["/"]);
+		// window.location.reload();
+		window.location.href = "/";
 		onUserLoginJs();
 	}
 
